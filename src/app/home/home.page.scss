@@ -1,27 +1,48 @@
-#container {
-  text-align: center;
+img {
+  height: 38em;
+  max-width: fit-content;
+  border: 0;
+}
 
+.statica {
+  height: 58em;
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+#myChart {
+  width: 50%;
+}
+body {
+  min-width: 100%;
+  text-align: center;
+}
+#all {
+  width: 100%;
+  margin: 0 auto; /*centers the website*/
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+#likes {
+  height: 5px;
+  width: 50%;
+  background: #0000ee;
+  float: left;
+}
+#dislikes {
+  height: 5px;
+  width: 50%;
+  background: #ccc;
+  float: right;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+#bar {
+  margin: 0 auto;
+  width: 60%;
 }

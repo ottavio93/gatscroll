@@ -1,20 +1,42 @@
+
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      CattScroll
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+
+
+<ion-content class="ion-padding" style="max-width: 38em;" >
+
+  <ion-card *ngFor="let gatto of gatti   index as i;first as isFirst "     class="statica noselect" >
+    <img [src]="gatto.image.url" class="noselect" [style.width]="'100%'">
+    
+    <ion-card-header >
+      
+      <ion-card-title  class="noselect">{{gatto.name}}</ion-card-title>
+      
+      <ion-card-subtitle class="noselect">{{gatto.description}}</ion-card-subtitle>
+<ion-card-subtitle class="noselect">origin: {{gatto.origin}}</ion-card-subtitle>
+<ion-card-subtitle class="noselect">likes: {{gatto.like}}</ion-card-subtitle>
+<div id="all">
+  <div id="bar">
+    <div id="likes" [style.width]="  this.gatti[i].barLikes"></div>
+
+    <div id="dislikes" [style.width]="  this.gatti[i].barDislikes"></div>
   </div>
+
+
+</div>
+<ion-card-subtitle><input type="button" value="Like" id="likeButton" (click)="putLike(i)" />
+  <input type="button" value="Dislike" id="dislikeButton" (click)="putDislike(i)" />
+</ion-card-subtitle>
+    </ion-card-header>
+
+  </ion-card> 
+
 </ion-content>
