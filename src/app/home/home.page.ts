@@ -20,7 +20,7 @@ export class HomePage implements AfterViewInit, OnInit {
   longPressActive = false;
   gatti: any;
   title = 'friends-app';
-  b = this.getAllCats();
+  gatti2 = this.getAllCats();
 
   like = 1;
   dislike = 1;
@@ -123,10 +123,19 @@ export class HomePage implements AfterViewInit, OnInit {
       gesture.enable(true);
     }
   }
+  getRandomCats(array: any[]) {
+    let gattiMischiati = array;
+    let gattilimitati;
+    gattiMischiati = gattiMischiati.sort(() => Math.random() - 0.5);
 
-  getCats() {
-    this.gattis.getAllCats().subscribe((data) => console.log(data));
+    gattilimitati = gattiMischiati.slice(0, 34);
+
+    return gattilimitati;
   }
+
+  // getCats() {
+  //   this.gattis.getAllCats().subscribe((data) => console.log(data));
+  // }
 
   getAllCats() {
     this.gattis.geti().subscribe((data) => {
@@ -146,6 +155,7 @@ export class HomePage implements AfterViewInit, OnInit {
         };
       });
       this.gatti.splice(62);
+      this.gatti = this.getRandomCats(this.gatti);
       console.log(this.gatti);
     });
   }

@@ -3,7 +3,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      CattScroll
+      CattScroll<i class="fas fa-heart"></i>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,23 +17,29 @@
     <img [src]="gatto.image.url" class="noselect" [style.width]="'100%'">
     
     <ion-card-header >
-      
+    
       <ion-card-title  class="noselect">{{gatto.name}}</ion-card-title>
-      
+        <ion-card-subtitle class="noselect">country: {{gatto.origin}}</ion-card-subtitle>
       <ion-card-subtitle class="noselect">{{gatto.description}}</ion-card-subtitle>
-<ion-card-subtitle class="noselect">origin: {{gatto.origin}}</ion-card-subtitle>
-<ion-card-subtitle class="noselect">likes: {{gatto.like}}</ion-card-subtitle>
+
+
 <div id="all">
-  <div id="bar">
+  <div id="bar" >
     <div id="likes" [style.width]="  this.gatti[i].barLikes"></div>
 
     <div id="dislikes" [style.width]="  this.gatti[i].barDislikes"></div>
   </div>
 
 
+
 </div>
-<ion-card-subtitle><input type="button" value="Like" id="likeButton" (click)="putLike(i)" />
-  <input type="button" value="Dislike" id="dislikeButton" (click)="putDislike(i)" />
+<ion-card-subtitle>
+  <div class="center">
+  <button value="Like" style="color: green; margin-right: 5%;" id="likeButton" (click)="putLike(i)" ><i class="fa fa-heart fa-3x"></i></button>
+    <button value="Dislike" style="color: red;"  id="dislikeButton" (click)="putDislike(i)">
+       <i class="fa fa-times fa-3x"></i></button>
+ 
+</div>
 </ion-card-subtitle>
     </ion-card-header>
 
