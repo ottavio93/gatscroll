@@ -1,3 +1,8 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { DbService } from './../services/db.service';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
 import {
   AfterViewInit,
   Component,
@@ -24,43 +29,34 @@ export class HomePage implements AfterViewInit, OnInit {
 
   like = 1;
   dislike = 1;
-
-  cardsi = [
-    {
-      img: 'https://placeimg.com/300/300/people',
-      title: 'Demo card 1',
-      description: 'This is a demo for Tinder like swipe cards',
-    },
-    {
-      img: 'https://placeimg.com/300/300/animals',
-      title: 'Demo card 2',
-      description: 'This is a demo for Tinder like swipe cards',
-    },
-    {
-      img: 'https://placeimg.com/300/300/nature',
-      title: 'Demo card 3',
-      description: 'This is a demo for Tinder like swipe cards',
-    },
-    {
-      img: 'https://placeimg.com/300/300/tech',
-      title: 'Demo card 4',
-      description: 'This is a demo for Tinder like swipe cards',
-    },
-    {
-      img: 'https://placeimg.com/300/300/arch',
-      title: 'Demo card 5',
-      description: 'This is a demo for Tinder like swipe cards',
-    },
-  ];
+  mainForm: FormGroup;
+  Data: any[] = [];
   @ViewChildren(IonCard, { read: ElementRef }) cards: QueryList<ElementRef>;
   constructor(
     public gattis: GattiService,
     public gestureCtrl: GestureController,
     private platform: Platform,
-    public rederer: Renderer2
+    public rederer: Renderer2,
+    private db: DbService,
+    public formBuilder: FormBuilder,
+    private toast: ToastController,
+    private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.db.dbState().subscribe((res) => {
+      if (res) {
+        this.db.fetchSongs().subscribe((item) => {
+          this.Data = item;
+        });
+      }
+    });
+
+    this.mainForm = this.formBuilder.group({
+      artist: [''],
+      song: [''],
+    });
+  }
 
   ngAfterViewInit() {
     this.cards.changes.subscribe((item) => {
@@ -91,28 +87,51 @@ export class HomePage implements AfterViewInit, OnInit {
     for (let i = 0; i < cardArray.length; i++) {
       const card = cardArray[i];
 
-      const gesture = this.gestureCtrl.create({
+      let gesture = this.gestureCtrl.create({
         el: card.nativeElement,
         gestureName: 'tinder-swipe',
-        onStart: (ev) => {},
+        passive: false,
+        onStart: () => {
+          this.rederer.setStyle(card.nativeElement, 'transition', 'none');
+        },
         onMove: (ev) => {
-          card.nativeElement.style.transform = `translateX(${
-            ev.deltaX
-          }px) rotate(${ev.deltaX / 10}deg)`;
+          console.log(ev);
+          this.rederer.setStyle(
+            card.nativeElement,
+            'transform',
+            `translateX(${ev.deltaX}px)`
+          );
+          // card.nativeElement.style.transform = `translateX(${
+          //   ev.deltaX
+          // }px) rotate(${ev.deltaX / 10}deg)`;
         },
         onEnd: (ev) => {
-          card.nativeElement.style.transition = '.3s ease-out';
+          card.nativeElement.style.transition = '.5s ease-out';
 
-          if (ev.deltaX > 120) {
-            card.nativeElement.style.transform = `translateX(${
-              +this.platform.width() * 4
-            }px) rotate (${ev.deltaX / 1.4}deg)`;
+          if (ev.deltaX > 100) {
+            this.rederer.setStyle(
+              card.nativeElement,
+              'transform',
+              'rotate(+20deg)translateX(700px)'
+            );
+            // card.nativeElement.style.transform = `translateX(${
+            //   +this.platform.width() * 4
+            // }px) rotate (${ev.deltaX / 1.4}deg)`;
             this.putLike(i);
-          } else if (ev.deltaX < -170) {
-            card.nativeElement.style.transform = `translateX(${
-              +this.platform.width() * 4
-            }px) rotate (-${ev.deltaX / 2}deg)`;
+            this.gatti.splice(i, 1);
+            console.log(this.gatti);
+          } else if (ev.deltaX < -100) {
+            this.rederer.setStyle(
+              card.nativeElement,
+              'transform',
+              'rotate(-10deg)translateX(-700px)'
+            );
+            // card.nativeElement.style.transform = `translateX(${
+            //   +this.platform.width() * 4
+            // }px) rotate (-${ev.deltaX / 2}deg)`;
             this.putDislike(i);
+            this.gatti.splice(i, 1);
+            console.log(this.gatti);
           } else {
             card.nativeElement.style.transform = '';
           }
@@ -128,7 +147,7 @@ export class HomePage implements AfterViewInit, OnInit {
     let gattilimitati;
     gattiMischiati = gattiMischiati.sort(() => Math.random() - 0.5);
 
-    gattilimitati = gattiMischiati.slice(0, 34);
+    gattilimitati = gattiMischiati.slice(0, 24);
 
     return gattilimitati;
   }
@@ -208,11 +227,30 @@ export class HomePage implements AfterViewInit, OnInit {
 
     this.calculateBar(i);
     console.log(this.like++);
-    this.ngOnInit();
+
+    this.gatti.splice(i, 1);
     // });
   }
   putDislike(i) {
     this.gatti[i].dislike = this.gatti[i].dislike + 1;
     this.calculateBar(i);
+    this.gatti.splice(i, 1);
+  }
+
+  storeData() {
+    this.db
+      .addSong(this.mainForm.value.artist, this.mainForm.value.song)
+      .then((res) => {
+        this.mainForm.reset();
+      });
+  }
+  deleteSong(id) {
+    this.db.deleteSong(id).then(async (res) => {
+      let toast = await this.toast.create({
+        message: 'Song deleted',
+        duration: 2500,
+      });
+      toast.present();
+    });
   }
 }

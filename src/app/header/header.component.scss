@@ -1,0 +1,19 @@
+.my-custom-menu {
+  --width: 500px;
+}
+
+ion-header ion-toolbar:first-of-type {
+  padding-top: var(--ion-safe-area-top, 0);
+  clear: both;
+
+  list-style-type: none;
+  text-align: center;
+  margin: 0;
+  padding: -4px;
+
+  padding-left: 8%;
+}
+.bottone {
+  background-color: transparent;
+  margin-right: 10%;
+}

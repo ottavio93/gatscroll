@@ -1,26 +1,23 @@
 
 
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      CattScroll<i class="fas fa-heart"></i>
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+  <app-header></app-header>
 </ion-header>
 
 
 
+<ion-content  overflow-scroll="true"   style="max-width: 38em;     height: 98%; overflow-x: hidden; overflow-y:hidden;" >
 
-<ion-content class="ion-padding" style="max-width: 38em;" >
-
-  <ion-card *ngFor="let gatto of gatti   index as i;first as isFirst "     class="statica noselect" >
-    <img [src]="gatto.image.url" class="noselect" [style.width]="'100%'">
+  <ion-card  overflow-scroll="true"  
+  *ngFor="let gatto of gatti   index as i;first as isFirst"  
+    class="statica noselect" >
+    <img [src]="gatto.image.url" class="noselect" >
     
-    <ion-card-header >
+  
     
-      <ion-card-title  class="noselect">{{gatto.name}}</ion-card-title>
-        <ion-card-subtitle class="noselect">country: {{gatto.origin}}</ion-card-subtitle>
-      <ion-card-subtitle class="noselect">{{gatto.description}}</ion-card-subtitle>
+      <ion-card-title  class=" title noselect">{{gatto.name}}</ion-card-title>
+        <ion-card-subtitle class="subtitle noselect">{{gatto.origin}}</ion-card-subtitle>
+      <ion-card-subtitle class="noselect testo">{{gatto.description}}</ion-card-subtitle>
 
 
 <div id="all">
@@ -41,7 +38,7 @@
  
 </div>
 </ion-card-subtitle>
-    </ion-card-header>
+    
 
   </ion-card> 
 
