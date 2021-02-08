@@ -1,15 +1,28 @@
 <app-header></app-header>
 
-<p>
-  tinder-card works!
-</p>
-<p>
-  tinder-card works!
-</p>
-<p>
-  tinder-card works!
-</p>
 
-<p>
-  tinder-card works!
-</p>
+<ion-content overflow-scroll="true" style="max-width: 38em;     height: 98%; overflow-x: hidden; overflow-y:hidden;">
+
+
+
+
+
+
+  <ion-card overflow-scroll="true" *ngFor="let gatto of gatti  index as i;first as isFirst" class="statica noselect">
+ 
+
+
+
+    <ion-card-title class=" title noselect">{{gatto.name}}</ion-card-title>
+   
+    <ion-card-subtitle class="noselect testo">score: {{gatto.like-gatto.dislike}}</ion-card-subtitle>
+
+
+
+
+  
+
+
+  </ion-card>
+
+</ion-content>

@@ -5,13 +5,13 @@
 </ion-header>
 
 
-
+<!-- [routerLink]="'/' + gatto.name" -->
 <ion-content  overflow-scroll="true"   style="max-width: 38em;     height: 98%; overflow-x: hidden; overflow-y:hidden;" >
 
   <ion-card  overflow-scroll="true"  
   *ngFor="let gatto of gatti   index as i;first as isFirst"  
     class="statica noselect" >
-    <img [src]="gatto.image.url" class="noselect" >
+    <img [src]="gatto.image.url" class="noselect"  >
     
   
     

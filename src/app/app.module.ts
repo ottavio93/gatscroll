@@ -14,6 +14,13 @@ import { GattiService } from './shared/gatti.service';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { HeaderComponent } from './header/header.component';
 import { SongPageModule } from './song/song.module';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
+import { from } from 'rxjs';
+import { FormatFileSizePipe } from './upload-cat/FormatFileSizePipe ';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,6 +31,8 @@ import { SongPageModule } from './song/song.module';
     AppRoutingModule,
     HttpClientModule,
     SongPageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
   ],
   providers: [
     StatusBar,
@@ -31,7 +40,7 @@ import { SongPageModule } from './song/song.module';
     SQLite,
     SQLitePorter,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-
+    InAppBrowser,
     GattiService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,11 +1,24 @@
 
 
-
 <ion-header style="position: fixed; padding-bottom: 0.5em;">
   <ion-toolbar>
    
 
+
+
+  
+
+
+
+
+
+
+
+
+
     <div class="center">
+
+     
 
       <button class="bottone" style="color: green;padding-top: 3%;" 
       
@@ -14,22 +27,28 @@ routerLinkActive="active-link"
 [routerLinkActiveOptions]="{ exact: true }"
       
       >
+        <ion-icon name="logo-octocat" size="large"></ion-icon>
         
-        <i class="fa fa-paw fa-2x"></i>
+
       </button>
 
 <button class="bottone"   style="color: rgb(202, 192, 192); "
 routerLink="/songs">
-<ion-icon name="logo-octocat" size="large"></ion-icon>
+
+<ion-icon name="paw-sharp" size="large"></ion-icon>
 </button>
 
 
-      <button  class="bottone" style="color: rgb(202, 192, 192);" id="likeButton" (click)="putLike(i)">
-        <i class="fa fa-cloud fa-2x">
-
-      </i></button>
+      <button class="bottone"  style="color: rgb(202, 192, 192);margin-right: 3em;     background-color: transparent;" 
+      routerLinkActive="tab-selected" routerLink="/upload-cat" class="ios" tab="make-appointment">
+      <ion-icon name="cloud-upload-sharp" size="large"></ion-icon>
+      
+      </button>
       <button  class="bottone"  style="color: rgb(202, 192, 192);" id="likeButton" (click)="putLike(i)">
-        <i class="fa fa-info-circle fa-2x"></i></button>
+      <ion-icon  name="chatbubbles-sharp" size="large"></ion-icon>
+      
+      
+      </button>
 
       
       

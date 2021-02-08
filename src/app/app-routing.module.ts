@@ -11,6 +11,14 @@ const routes: Routes = [
   },
 
   {
+    path: 'upload-cat',
+    loadChildren: () =>
+      import('./upload-cat/upload-cat.module').then(
+        (m) => m.UploadCatPageModule
+      ),
+  },
+
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
@@ -21,6 +29,13 @@ const routes: Routes = [
       import('./song/song.module').then((m) => m.SongPageModule),
   },
   { path: 'songs', component: TinderCardComponent },
+  {
+    path: 'upload-cat',
+    loadChildren: () =>
+      import('./upload-cat/upload-cat.module').then(
+        (m) => m.UploadCatPageModule
+      ),
+  },
 ];
 
 @NgModule({

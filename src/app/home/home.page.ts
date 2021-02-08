@@ -9,6 +9,7 @@ import {
   ElementRef,
   NgZone,
   OnInit,
+  Output,
   QueryList,
   Renderer2,
   ViewChildren,
@@ -99,7 +100,7 @@ export class HomePage implements AfterViewInit, OnInit {
           this.rederer.setStyle(
             card.nativeElement,
             'transform',
-            `translateX(${ev.deltaX}px)`
+            `translateX(${ev.deltaX}px)rotate(${ev.deltaX / 10}deg)`
           );
           // card.nativeElement.style.transform = `translateX(${
           //   ev.deltaX
@@ -253,4 +254,5 @@ export class HomePage implements AfterViewInit, OnInit {
       toast.present();
     });
   }
+  // @Output();
 }
