@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { Gesture, GestureController, IonCard, Platform } from '@ionic/angular';
 import { GattiService } from '../shared/gatti.service';
-
+import { Gatti2Service } from '../shared/gatti2.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -34,6 +34,7 @@ export class HomePage implements AfterViewInit, OnInit {
   Data: any[] = [];
   @ViewChildren(IonCard, { read: ElementRef }) cards: QueryList<ElementRef>;
   constructor(
+    public gattis2: Gatti2Service,
     public gattis: GattiService,
     public gestureCtrl: GestureController,
     private platform: Platform,
@@ -57,6 +58,7 @@ export class HomePage implements AfterViewInit, OnInit {
       artist: [''],
       song: [''],
     });
+    this.getUploadedCats();
   }
 
   ngAfterViewInit() {
@@ -143,13 +145,24 @@ export class HomePage implements AfterViewInit, OnInit {
       gesture.enable(true);
     }
   }
+  getUploadedCats() {
+    this.gattis2
+      .getCatList()
+      .valueChanges()
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+
   getRandomCats(array: any[]) {
     let gattiMischiati = array;
+
     let gattilimitati;
     gattiMischiati = gattiMischiati.sort(() => Math.random() - 0.5);
 
     gattilimitati = gattiMischiati.slice(0, 24);
 
+    console.log(gattilimitati);
     return gattilimitati;
   }
 
@@ -158,25 +171,39 @@ export class HomePage implements AfterViewInit, OnInit {
   // }
 
   getAllCats() {
+    let gattifinali;
     this.gattis.geti().subscribe((data) => {
-      this.gatti = data;
+      this.gattis2
+        .getCatList()
+        .valueChanges()
+        .subscribe((res) => {
+          console.log(res);
+          res.forEach(function (element) {
+            element.image = {
+              url: element.img,
+            };
+          });
+          this.gatti = data;
 
-      let removeValFromIndex = [30, 40, 40];
+          console.log(this.gatti);
+          let removeValFromIndex = [30, 40, 40];
 
-      for (var i = removeValFromIndex.length - 1; i >= 0; i--) {
-        this.gatti.splice(removeValFromIndex[i], 1);
-      }
-      this.gatti.forEach(function (element) {
-        element.like = 1;
-        element.dislike = 1;
-        element.bar = {
-          barLikes: '50%',
-          barDislikes: '50%',
-        };
-      });
-      this.gatti.splice(62);
-      this.gatti = this.getRandomCats(this.gatti);
-      console.log(this.gatti);
+          for (var i = removeValFromIndex.length - 1; i >= 0; i--) {
+            this.gatti.splice(removeValFromIndex[i], 1);
+          }
+          this.gatti.forEach(function (element) {
+            element.like = 1;
+            element.dislike = 1;
+            element.bar = {
+              barLikes: '50%',
+              barDislikes: '50%',
+            };
+          });
+          this.gatti.splice(62);
+          this.gatti = this.getRandomCats(this.gatti);
+          this.gatti = this.gatti.concat(res);
+          console.log(this.gatti);
+        });
     });
   }
 

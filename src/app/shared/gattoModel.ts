@@ -3,7 +3,7 @@ export class Gatto {
   name: string;
   img: {
     name: string;
-    filepath: string;
+    url: string;
     size: number;
   };
   description: string;

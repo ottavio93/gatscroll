@@ -73,8 +73,7 @@ export class UploadCatPage implements OnInit {
     this.isFileUploaded = false;
 
     this.imgName = file.name;
-    const path1 =
-      'https://firebasestorage.googleapis.com/v0/b/gatscroll.appspot.com/o/';
+
     // Storage path
     this.fileStoragePath = `filesStorage/${new Date().getTime()}_${file.name}`;
     console.log(this.fileStoragePath);
@@ -96,17 +95,17 @@ export class UploadCatPage implements OnInit {
           (resp) => {
             this.storeFilesFirebase({
               name: file.name,
-              filepath: resp,
+              url: resp,
               size: this.imgSize,
             });
 
             this.bookingForm = this.fb.group({
-              name: [''],
-              description: [''],
-
+              name: [this.bookingForm.value.name],
+              description: [this.bookingForm.value.description],
               img: [resp],
             });
             console.log(resp);
+            console.log(this.bookingForm);
             this.isFileUploading = false;
             this.isFileUploaded = true;
           },
@@ -141,7 +140,7 @@ export class UploadCatPage implements OnInit {
       name: [''],
       description: [''],
 
-      img: ['ff'],
+      img: [''],
     });
 
     this.fetchBookings();
@@ -164,8 +163,9 @@ export class UploadCatPage implements OnInit {
         .createCat(this.bookingForm.value)
         .then((res) => {
           console.log(res);
-          this.bookingForm.reset();
+
           this.router.navigate(['/home']);
+          this.bookingForm.reset();
         })
         .catch((error) => console.log(error));
     }
