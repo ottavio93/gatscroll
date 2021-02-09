@@ -25,8 +25,8 @@ export class Gatti2Service {
   }
 
   // Get Single
-  getBooking(id: string) {
-    this.bookingRef = this.db.object('/gatto/' + id);
+  getGatto(name: string) {
+    this.bookingRef = this.db.object('/gatto/' + name);
     return this.bookingRef;
   }
 

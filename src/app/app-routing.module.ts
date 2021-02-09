@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { CatComponent } from './home/cat/cat.component';
 import { SongPage } from './song/song.page';
 import { TinderCardComponent } from './tinder-card/tinder-card.component';
 
@@ -36,6 +37,12 @@ const routes: Routes = [
         (m) => m.UploadCatPageModule
       ),
   },
+  { path: 'gatto/:name', component: CatComponent },
+  // {
+  //   path: 'name',
+  //   loadChildren: () =>
+  //     import('./home/home.module').then((m) => m.HomePageModule),
+  // },
 ];
 
 @NgModule({

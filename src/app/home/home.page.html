@@ -10,22 +10,24 @@
 
   <ion-card  overflow-scroll="true"  
   *ngFor="let gatto of gatti   index as i;first as isFirst"  
-    class="statica noselect" >
-    <img [src]="gatto.image.url" class="noselect"  >
-    
+    class="statica noselect" 
+     >
+     <div >
+    <img   [src]="gatto.image.url" class="noselect"  [routerLink]="['/gatto', gatto.name]" >
+    </div>
+  <div id="all">
+    <div id="bar">
+      <div id="likes" [style.width]="  this.gatti[i].barLikes"></div>
   
+      <div id="dislikes" [style.width]="  this.gatti[i].barDislikes"></div>
+    </div>
     
       <ion-card-title  class=" title noselect">{{gatto.name}}</ion-card-title>
        <ion-card-subtitle class="subtitle noselect">{{gatto.origin}}</ion-card-subtitle> 
       <ion-card-subtitle class="noselect testo">{{gatto.description}}</ion-card-subtitle>
 
 
-<div id="all">
-  <div id="bar" >
-    <div id="likes" [style.width]="  this.gatti[i].barLikes"></div>
 
-    <div id="dislikes" [style.width]="  this.gatti[i].barDislikes"></div>
-  </div>
 
 
 

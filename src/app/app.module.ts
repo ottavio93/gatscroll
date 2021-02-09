@@ -21,6 +21,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { from } from 'rxjs';
 import { FormatFileSizePipe } from './upload-cat/FormatFileSizePipe ';
+import { CatComponent } from './home/cat/cat.component';
+import { HomePage } from './home/home.page';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -45,5 +47,6 @@ import { FormatFileSizePipe } from './upload-cat/FormatFileSizePipe ';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
+  exports: [AppRoutingModule],
 })
 export class AppModule {}

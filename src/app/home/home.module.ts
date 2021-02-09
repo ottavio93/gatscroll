@@ -7,6 +7,10 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HeaderComponent } from '../header/header.component';
 import { TinderCardComponent } from '../tinder-card/tinder-card.component';
+import { CatComponent } from './cat/cat.component';
+import { RouterModule } from '@angular/router';
+import { App } from '@capacitor/core';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   imports: [
@@ -17,6 +21,6 @@ import { TinderCardComponent } from '../tinder-card/tinder-card.component';
     ReactiveFormsModule,
     FormsModule,
   ],
-  declarations: [HomePage, HeaderComponent, TinderCardComponent],
+  declarations: [HomePage, HeaderComponent, TinderCardComponent, CatComponent],
 })
 export class HomePageModule {}

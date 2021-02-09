@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DbService } from './../services/db.service';
 import { ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import {
   AfterViewInit,
@@ -27,13 +27,14 @@ export class HomePage implements AfterViewInit, OnInit {
   gatti: any;
   title = 'friends-app';
   gatti2 = this.getAllCats();
-
+  username: string;
   like = 1;
   dislike = 1;
   mainForm: FormGroup;
   Data: any[] = [];
   @ViewChildren(IonCard, { read: ElementRef }) cards: QueryList<ElementRef>;
   constructor(
+    private route: ActivatedRoute,
     public gattis2: Gatti2Service,
     public gattis: GattiService,
     public gestureCtrl: GestureController,
@@ -46,6 +47,10 @@ export class HomePage implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.username = params.name; // same as :name in route
+      console.log(this.username);
+    });
     this.db.dbState().subscribe((res) => {
       if (res) {
         this.db.fetchSongs().subscribe((item) => {
