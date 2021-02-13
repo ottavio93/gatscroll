@@ -6,5 +6,7 @@ export class Gatto {
     url: string;
     size: number;
   };
+  location: string;
+  distinction: string;
   description: string;
 }

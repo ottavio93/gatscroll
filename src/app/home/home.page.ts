@@ -24,46 +24,31 @@ import { Gatti2Service } from '../shared/gatti2.service';
 })
 export class HomePage implements AfterViewInit, OnInit {
   longPressActive = false;
+  currentItem = 'Television';
   gatti: any;
   title = 'friends-app';
   gatti2 = this.getAllCats();
-  username: string;
+
+  username: string = 'e daiiiiiiiii';
   like = 1;
   dislike = 1;
+  hiddenDetails = false;
   mainForm: FormGroup;
   Data: any[] = [];
   @ViewChildren(IonCard, { read: ElementRef }) cards: QueryList<ElementRef>;
   constructor(
-    private route: ActivatedRoute,
     public gattis2: Gatti2Service,
     public gattis: GattiService,
     public gestureCtrl: GestureController,
-    private platform: Platform,
+
     public rederer: Renderer2,
     private db: DbService,
     public formBuilder: FormBuilder,
-    private toast: ToastController,
-    private router: Router
+    private toast: ToastController
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.username = params.name; // same as :name in route
-      console.log(this.username);
-    });
-    this.db.dbState().subscribe((res) => {
-      if (res) {
-        this.db.fetchSongs().subscribe((item) => {
-          this.Data = item;
-        });
-      }
-    });
-
-    this.mainForm = this.formBuilder.group({
-      artist: [''],
-      song: [''],
-    });
-    this.getUploadedCats();
+    this.username = 'lino';
   }
 
   ngAfterViewInit() {
@@ -89,7 +74,7 @@ export class HomePage implements AfterViewInit, OnInit {
 
     //Calculates bar widths
   }
-
+  //prende in ingresso le card che vengono prima ngoninit e poi dal viewchildren
   useTinderSwipe(cardArray) {
     console.log('el:gggggggggggggggggggg ');
     for (let i = 0; i < cardArray.length; i++) {
@@ -103,7 +88,6 @@ export class HomePage implements AfterViewInit, OnInit {
           this.rederer.setStyle(card.nativeElement, 'transition', 'none');
         },
         onMove: (ev) => {
-          console.log(ev);
           this.rederer.setStyle(
             card.nativeElement,
             'transform',
@@ -127,7 +111,8 @@ export class HomePage implements AfterViewInit, OnInit {
             // }px) rotate (${ev.deltaX / 1.4}deg)`;
             this.putLike(i);
             this.gatti.splice(i, 1);
-            console.log(this.gatti);
+
+            this.hiddenDetails = false;
           } else if (ev.deltaX < -100) {
             this.rederer.setStyle(
               card.nativeElement,
@@ -139,7 +124,7 @@ export class HomePage implements AfterViewInit, OnInit {
             // }px) rotate (-${ev.deltaX / 2}deg)`;
             this.putDislike(i);
             this.gatti.splice(i, 1);
-            console.log(this.gatti);
+            this.hiddenDetails = false;
           } else {
             card.nativeElement.style.transform = '';
           }
@@ -151,24 +136,23 @@ export class HomePage implements AfterViewInit, OnInit {
     }
   }
   getUploadedCats() {
-    this.gattis2
+    let ke = this.gattis2
       .getCatList()
       .valueChanges()
       .subscribe((res) => {
-        console.log(res);
+        let gatti = res;
+        for (let index = 0; index < gatti.length; index++) {
+          gatti[index].$key + 'gggggggggggggggggggggggggggggggggg';
+        }
       });
   }
-
-  getRandomCats(array: any[]) {
-    let gattiMischiati = array;
-
-    let gattilimitati;
-    gattiMischiati = gattiMischiati.sort(() => Math.random() - 0.5);
-
-    gattilimitati = gattiMischiati.slice(0, 24);
-
-    console.log(gattilimitati);
-    return gattilimitati;
+  toggleDetailsCard() {
+    if (this.hiddenDetails == false) {
+      console.log('cambiato');
+      this.hiddenDetails = true;
+    } else {
+      this.hiddenDetails = false;
+    }
   }
 
   // getCats() {
@@ -212,24 +196,17 @@ export class HomePage implements AfterViewInit, OnInit {
     });
   }
 
-  useLongPress(cardArray) {
-    for (let index = 0; index < cardArray.length; index++) {
-      const card = cardArray[index];
-      console.log('card:', card);
+  // gatti delle    apiiiiiiiiiiiiiiiiiiiiii     NON db
+  getRandomCats(array: any[]) {
+    let gattiMischiati = array;
 
-      const gesture: Gesture = this.gestureCtrl.create({
-        el: card.nativeElement,
-        threshold: 15,
-        gestureName: 'my-gesture',
-        onStart: (ev) => {
-          this.longPressActive = true;
-        },
-        onEnd: (ev) => {
-          this.longPressActive = false;
-        },
-      });
-    }
-    console.log('card:');
+    let gattilimitati;
+    gattiMischiati = gattiMischiati.sort(() => Math.random() - 0.5);
+
+    gattilimitati = gattiMischiati.slice(0, 14);
+
+    //  console.log(gattilimitati);
+    return gattilimitati;
   }
 
   calculateBar(i: number) {
@@ -270,21 +247,41 @@ export class HomePage implements AfterViewInit, OnInit {
     this.gatti.splice(i, 1);
   }
 
-  storeData() {
-    this.db
-      .addSong(this.mainForm.value.artist, this.mainForm.value.song)
-      .then((res) => {
-        this.mainForm.reset();
-      });
-  }
-  deleteSong(id) {
-    this.db.deleteSong(id).then(async (res) => {
-      let toast = await this.toast.create({
-        message: 'Song deleted',
-        duration: 2500,
-      });
-      toast.present();
-    });
-  }
-  // @Output();
+  // storeData() {
+  //   this.db
+  //     .addSong(this.mainForm.value.artist, this.mainForm.value.song)
+  //     .then((res) => {
+  //       this.mainForm.reset();
+  //     });
+  // }
+  // deleteSong(id) {
+  //   this.db.deleteSong(id).then(async (res) => {
+  //     let toast = await this.toast.create({
+  //       message: 'Song deleted',
+  //       duration: 2500,
+  //     });
+  //     toast.present();
+  //   });
+  // }
+  @Output()
+  uname: string;
 }
+// useLongPress(cardArray) {
+//   for (let index = 0; index < cardArray.length; index++) {
+//     const card = cardArray[index];
+//     console.log('card:', card);
+
+//     const gesture: Gesture = this.gestureCtrl.create({
+//       el: card.nativeElement,
+//       threshold: 15,
+//       gestureName: 'my-gesture',
+//       onStart: (ev) => {
+//         this.longPressActive = true;
+//       },
+//       onEnd: (ev) => {
+//         this.longPressActive = false;
+//       },
+//     });
+//   }
+//   console.log('card:');
+// }

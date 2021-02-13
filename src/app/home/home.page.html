@@ -4,16 +4,20 @@
   <app-header></app-header>
 </ion-header>
 
-
 <!-- [routerLink]="'/' + gatto.name" -->
 <ion-content  overflow-scroll="true"   style="max-width: 38em;     height: 98%; overflow-x: hidden; overflow-y:hidden;" >
 
-  <ion-card  overflow-scroll="true"  
+
+  <ion-card  overflow-scroll="true"  (click)="toggleDetailsCard()"
   *ngFor="let gatto of gatti   index as i;first as isFirst"  
     class="statica noselect" 
      >
-     <div >
-    <img   [src]="gatto.image.url" class="noselect"  [routerLink]="['/gatto', gatto.name]" >
+    <!-- [routerLink]="['/gatto', gatto.name]" -->
+     <div  >
+    <img   
+    [ngStyle]="{'height': hiddenDetails ? '33em' : '44em'}"
+    overflow-scroll="true" 
+    [src]="gatto.image.url" class="noselect"   >
     </div>
   <div id="all">
     <div id="bar">
@@ -21,15 +25,15 @@
   
       <div id="dislikes" [style.width]="  this.gatti[i].barDislikes"></div>
     </div>
-    
-      <ion-card-title  class=" title noselect">{{gatto.name}}</ion-card-title>
-       <ion-card-subtitle class="subtitle noselect">{{gatto.origin}}</ion-card-subtitle> 
-      <ion-card-subtitle class="noselect testo">{{gatto.description}}</ion-card-subtitle>
+ 
+      <ion-card-title  class=" title noselect"[ngStyle]="{'top': hiddenDetails ? '10em' : '13.8em'}">{{gatto.name}}</ion-card-title>
+       <ion-card-subtitle class="subtitle noselect"[ngStyle]="{'top': hiddenDetails ? '31em' : '41.2em'}">{{gatto.origin}}</ion-card-subtitle> 
+     
+<div *ngIf="hiddenDetails">
+  <ion-card-subtitle class="noselect testo">{{gatto.description}}</ion-card-subtitle>
+<ion-card-subtitle class="noselect testo">{{gatto.temperament}}</ion-card-subtitle>
 
-
-
-
-
+</div>
 
 </div>
 <ion-card-subtitle>
@@ -42,6 +46,6 @@
 </ion-card-subtitle>
     
 
-  </ion-card> 
+  </ion-card>
 
 </ion-content>

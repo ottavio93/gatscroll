@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Pipe } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Gatti2Service } from 'src/app/shared/gatti2.service';
-import { Gatto } from 'src/app/shared/gattoModel';
 
 @Component({
   selector: 'app-cat',
@@ -9,39 +8,40 @@ import { Gatto } from 'src/app/shared/gattoModel';
   styleUrls: ['./cat.component.scss'],
 })
 export class CatComponent implements OnInit {
-  constructor(
-    private activatedRoute: ActivatedRoute,
+  // @Input()
+  // uname: string;
+  // @Input() item: string;
 
-    private gattos: Gatti2Service
-  ) {}
+  constructor() // private gattos: Gatti2Service // private activatedRoute: ActivatedRoute,
+  {}
   res;
   username;
   nome;
+
   ngOnInit() {
-    console.log('e arivatoooo');
-    this.activatedRoute.params.subscribe((params: Params) => {
-      this.username = params.name; // same as :name in route
-      console.log(this.username);
-      this.nome = this.username;
-      this.gattos
-        .getGatto(this.nome)
-        .valueChanges()
-        .subscribe((res) => {
-          this.res = res;
-          console.log(this.res);
-        });
-      this.getUploadedCats(this.nome);
-      console.log(this.getUploadedCats(this.nome));
-    });
+    // console.log('e arivatoooo' + this.uname);
+    // this.activatedRoute.params.subscribe((params: Params) => {
+    //   console.log(params);
+    //   this.nome = params;
+    //   let gatton: string = this.nome.name;
+    //   this.gattos
+    //     .getGatto(gatton)
+    //     .valueChanges()
+    //     .subscribe((res) => {
+    //       console.log(res);
+    //     });
+    //   this.getUploadedCats('-MT4HkWShv7GZwqGsm8c');
+    //   console.log(this.getUploadedCats(gatton));
+    // });
   }
 
-  getUploadedCats(nome) {
-    this.gattos
-      .getGatto(nome)
-      .valueChanges()
-      .subscribe((res) => {
-        this.res = res;
-        console.log(this.res);
-      });
-  }
+  //   getUploadedCats(nome) {
+  //     this.gattos
+  //       .getGatto(nome)
+  //       .valueChanges()
+  //       .subscribe((res) => {
+  //         this.res = res;
+  //         console.log(this.res);
+  //       });
+  //   }
 }
