@@ -4,10 +4,16 @@
 
     <app-header></app-header>
 
+ 
+
 </ion-header>
 
 <ion-content>
+
+<mat-chip-list></mat-chip-list>
+
   <ion-list lines="full">
+    <mat-chip-list></mat-chip-list>
     <form [formGroup]="bookingForm" (ngSubmit)="formSubmit()">
     
       <ion-item>
@@ -44,6 +50,8 @@
         </ion-col>
       </ion-row>
     </form>
+     <ion-row></ion-row>
   </ion-list>
-  
+  <mat-chip-list></mat-chip-list>
+<app-caratteristiche-gatto></app-caratteristiche-gatto>
 </ion-content>

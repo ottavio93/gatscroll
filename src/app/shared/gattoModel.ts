@@ -9,6 +9,7 @@ export class Gatto {
     size: number;
   };
   origin: string;
+  peculiarity: string[];
   temperament: string;
   description: string;
 }
