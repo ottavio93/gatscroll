@@ -36,3 +36,13 @@ $warn: mat-palette($mat-red);
 $theme: mat-light-theme($primary, $accent, $warn);
 $dark-theme: mat-dark-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: rgb(0 0 0 / 14%);
+}
+.mat-form-field-flex {
+  padding-left: 1em;
+  display: inline-flex;
+  align-items: baseline;
+  box-sizing: border-box;
+  width: 100%;
+}
