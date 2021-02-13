@@ -21,6 +21,8 @@ export class Gatti2Service {
       name: gatto.name,
       description: gatto.description,
       img: gatto.img,
+      like: 1,
+      dislike: 1,
     });
   }
 

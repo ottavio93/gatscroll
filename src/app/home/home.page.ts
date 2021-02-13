@@ -174,7 +174,6 @@ export class HomePage implements AfterViewInit, OnInit {
           });
           this.gatti = data;
 
-          console.log(this.gatti);
           let removeValFromIndex = [30, 40, 40];
 
           for (var i = removeValFromIndex.length - 1; i >= 0; i--) {
@@ -183,10 +182,6 @@ export class HomePage implements AfterViewInit, OnInit {
           this.gatti.forEach(function (element) {
             element.like = 1;
             element.dislike = 1;
-            element.bar = {
-              barLikes: '50%',
-              barDislikes: '50%',
-            };
           });
           this.gatti.splice(62);
           this.gatti = this.getRandomCats(this.gatti);
@@ -229,22 +224,19 @@ export class HomePage implements AfterViewInit, OnInit {
   }
 
   putLike(i: number) {
-    // this.gattis.geti().subscribe((data) => {
-    //   this.gatti = data;
-
     this.gatti[i].like = this.gatti[i].like + 1;
-    console.log(this.gatti[i]);
+    //   console.log(this.gatti[i]);
 
     this.calculateBar(i);
     console.log(this.like++);
 
-    this.gatti.splice(i, 1);
+    // this.gatti.splice(i, 1);
     // });
   }
   putDislike(i) {
     this.gatti[i].dislike = this.gatti[i].dislike + 1;
     this.calculateBar(i);
-    this.gatti.splice(i, 1);
+    //  this.gatti.splice(i, 1);
   }
 
   // storeData() {

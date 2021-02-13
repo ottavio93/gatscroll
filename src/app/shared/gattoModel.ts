@@ -1,12 +1,14 @@
 export class Gatto {
   $key: string;
   name: string;
+  like: number = 0;
+  dislike: number = 0;
   img: {
     name: string;
     url: string;
     size: number;
   };
-  location: string;
-  distinction: string;
+  origin: string;
+  temperament: string;
   description: string;
 }
