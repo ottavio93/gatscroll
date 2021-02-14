@@ -1,0 +1,139 @@
+img {
+  height: 34em;
+  width: 100%;
+  object-fit: cover;
+  border: 0;
+  box-shadow: black;
+  border-radius: 8px;
+}
+.title {
+  position: absolute;
+  font-size: 2.9em;
+
+  left: 0.4em;
+  color: rgb(255, 255, 255);
+  text-shadow: 3px 3px 9px black;
+}
+
+.subtitle {
+  text-shadow: 3px 3px 9px black;
+  position: absolute;
+  font-size: 1em;
+  left: 1.3em;
+  font-weight: 400;
+
+  left: 1.4em;
+  color: rgb(255, 255, 255);
+}
+.statica {
+  margin-top: 1%;
+  border-color: azure;
+  border-style: solid;
+  border-width: 1px;
+  width: -webkit-fill-available;
+
+  display: inline-block;
+  height: 90%;
+  background: #ffffff;
+  padding-bottom: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: absolute;
+  will-change: transform;
+  transition: all 0.3s ease-in-out;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+}
+.noselect {
+  width: -webkit-fill-available;
+
+  overflow: hidden;
+
+  will-change: transform;
+  transition: all 0.3s ease-in-out;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+#myChart {
+  width: 50%;
+}
+body {
+  min-width: 100%;
+  text-align: center;
+}
+#all {
+  width: 100%;
+  margin: 0 auto; /*centers the website*/
+}
+
+#likes {
+  height: 5px;
+  width: 50%;
+  background: #0000ee;
+  float: left;
+}
+#dislikes {
+  height: 5px;
+  width: 50%;
+  background: #ccc;
+  float: right;
+}
+
+#bar {
+  padding-top: 1em;
+  margin: 0 auto;
+  width: 60%;
+}
+.center {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  /* padding-bottom: 1em; */
+  /* position: relative; */
+  width: 50%;
+  /* bottom: 10px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* bottom: -1em; */
+  left: 25%;
+  margin-bottom: 1em;
+}
+
+button {
+  padding: 1em;
+  border: 0;
+  width: 5em;
+  border-radius: 50px;
+  font-family: inherit;
+  font-style: inherit;
+  font-variant: inherit;
+  /* line-height: 1; */
+  /* text-transform: none; */
+  /* cursor: pointer; */
+  -webkit-appearance: button;
+}
+.testo {
+  padding: 1em;
+  display: inline-block;
+
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+}

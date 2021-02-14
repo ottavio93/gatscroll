@@ -1,28 +1,45 @@
-<app-header></app-header>
+<ion-header>
+  <app-header></app-header>
+</ion-header>
+<ion-content overflow-scroll="true" style="  height: 98%; overflow-x: hidden; overflow-y:hidden;">
+
+  <div style="margin: auto;
+ width: 38em;">
+
+    <ion-card overflow-scroll="true" style="width: 41em; top: 5em;"
+      *ngFor="let gatto of gatti   index as i;first as isFirst" class="statica noselect">
+
+      <div (click)="toggleDetailsCard()">
+        <img [ngStyle]="{'height': hiddenDetails ? '33em' : '44em'}" overflow-scroll="true" [src]="gatto.image.url"
+          class="noselect">
+
+        <div id="all">
+          <div id="bar">
+            <div id="likes" [style.width]="  this.gatti[i].barLikes"></div>
+
+            <div id="dislikes" [style.width]="  this.gatti[i].barDislikes"></div>
+          </div>
+
+          <ion-card-title class=" title noselect" [ngStyle]="{'top': hiddenDetails ? ' 9.3em' : '12.8em'}">
+            {{gatto.name}} </ion-card-title>
+          <ion-card-subtitle class="subtitle noselect" [ngStyle]="{'top': hiddenDetails ? '31em' : '41.2em'}">
+            {{gatto.origin}}</ion-card-subtitle>
+
+          <div *ngIf="hiddenDetails">
+          
+
+            <ion-card-subtitle class="noselect testo">{{gatto.description}}</ion-card-subtitle>
+            <ion-card-subtitle class="noselect testo">{{gatto.temperament}}</ion-card-subtitle>
+
+          </div>
+
+        </div>
 
 
-<ion-content overflow-scroll="true" style="max-width: 38em;     height: 98%; overflow-x: hidden; overflow-y:hidden;">
+      </div>
 
 
 
-
-
-
-  <ion-card overflow-scroll="true" *ngFor="let gatto of gatti  index as i;first as isFirst" class="statica noselect">
- 
-
-
-
-    <ion-card-title class=" title noselect">{{gatto.name}}</ion-card-title>
-   
-    <ion-card-subtitle class="noselect testo">score: {{gatto.like-gatto.dislike}}</ion-card-subtitle>
-
-
-
-
-  
-
-
-  </ion-card>
-
+    </ion-card>
+  </div>
 </ion-content>

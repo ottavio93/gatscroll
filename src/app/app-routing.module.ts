@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { CatComponent } from './home/cat/cat.component';
+import { TinderCardComponent } from './tinder-card/tinder-card.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
   //   loadChildren: () =>
   //     import('./song/song.module').then((m) => m.SongPageModule),
   // },
-  // { path: 'songs', component: TinderCardComponent },
+  { path: 'songs', component: TinderCardComponent },
   {
     path: 'upload-cat',
     loadChildren: () =>

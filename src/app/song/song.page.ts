@@ -1,14 +1,14 @@
-// import { Component, OnInit } from '@angular/core';
-// import { FormGroup, FormBuilder } from '@angular/forms';
-// import { DbService } from './../services/db.service';
-// import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { DbService } from './../services/db.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
-// @Component({
-//   selector: 'app-song',
-//   templateUrl: './song.page.html',
-//   styleUrls: ['./song.page.scss'],
-// })
-// export class SongPage {
+@Component({
+  selector: 'app-song',
+  templateUrl: './song.page.html',
+  styleUrls: ['./song.page.scss'],
+})
+export class SongPage {
   // editForm: FormGroup;
   // id: any;
   // constructor(
@@ -37,4 +37,4 @@
   //     this.router.navigate(['/home']);
   //   });
   // }
-// }
+}

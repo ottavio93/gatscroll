@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GattiService } from './shared/gatti.service';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { HeaderComponent } from './header/header.component';
-
+import { SongPageModule } from './song/song.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
@@ -22,12 +22,9 @@ import {
   MatChipsModule,
   MAT_CHIPS_DEFAULT_OPTIONS,
 } from '@angular/material/chips';
-import { from } from 'rxjs';
-import { FormatFileSizePipe } from './upload-cat/FormatFileSizePipe ';
-import { CatComponent } from './home/cat/cat.component';
-import { HomePage } from './home/home.page';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -38,7 +35,7 @@ import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-
+    SongPageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     BrowserAnimationsModule,

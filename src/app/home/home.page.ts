@@ -1,20 +1,16 @@
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { DbService } from './../services/db.service';
-import { ToastController } from '@ionic/angular';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import {
   AfterViewInit,
   Component,
   ElementRef,
-  NgZone,
   OnInit,
   Output,
   QueryList,
   Renderer2,
   ViewChildren,
 } from '@angular/core';
-import { Gesture, GestureController, IonCard, Platform } from '@ionic/angular';
+import { GestureController, IonCard, Platform } from '@ionic/angular';
 import { GattiService } from '../shared/gatti.service';
 import { Gatti2Service } from '../shared/gatti2.service';
 @Component({
@@ -40,11 +36,8 @@ export class HomePage implements AfterViewInit, OnInit {
     public gattis2: Gatti2Service,
     public gattis: GattiService,
     public gestureCtrl: GestureController,
-
     public rederer: Renderer2,
-    private db: DbService,
-    public formBuilder: FormBuilder,
-    private toast: ToastController
+    public formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
@@ -75,8 +68,8 @@ export class HomePage implements AfterViewInit, OnInit {
     //Calculates bar widths
   }
   //prende in ingresso le card che vengono prima ngoninit e poi dal viewchildren
+
   useTinderSwipe(cardArray) {
-    console.log('el:gggggggggggggggggggg ');
     for (let i = 0; i < cardArray.length; i++) {
       const card = cardArray[i];
 
@@ -101,37 +94,37 @@ export class HomePage implements AfterViewInit, OnInit {
           card.nativeElement.style.transition = '.5s ease-out';
 
           if (ev.deltaX > 100) {
+            this.putLike(i);
+            this.gatti.splice(i, 1);
             this.rederer.setStyle(
               card.nativeElement,
               'transform',
               'rotate(+20deg)translateX(700px)'
             );
-            this.rederer.setStyle(card.nativeElement, 'display', 'none');
+
+            // this.rederer.setStyle(card.nativeElement, 'display', 'none');
             // card.nativeElement.style.transform = `translateX(${
             //   +this.platform.width() * 4
             // }px) rotate (${ev.deltaX / 1.4}deg)`;
-            this.putLike(i);
-            this.gatti.splice(i, 1);
 
             this.hiddenDetails = false;
           } else if (ev.deltaX < -100) {
+            this.putDislike(i);
+            this.gatti.splice(i, 1);
             this.rederer.setStyle(
               card.nativeElement,
               'transform',
               'rotate(-20deg)translateX(-700px)'
             );
-            this.rederer.setStyle(card.nativeElement, 'display', 'none');
-
-            this.putDislike(i);
-            this.gatti.splice(i, 1);
+            // this.rederer.setStyle(card.nativeElement, 'display', 'none');
           } else {
             card.nativeElement.style.transform = '';
           }
           this.hiddenDetails = false;
         },
       });
-      this.gatti[i].barLikes = '50' + '%';
-      this.gatti[i].barDislikes = '50%';
+      // this.gatti[i].barLikes = '50%';
+      // this.gatti[i].barDislikes = '50%';
       gesture.enable(true);
     }
   }
@@ -160,36 +153,27 @@ export class HomePage implements AfterViewInit, OnInit {
   // }
 
   getAllCats() {
-    let gattifinali;
-    this.gattis.geti().subscribe((data) => {
-      this.gattis2
-        .getCatList()
-        .valueChanges()
-        .subscribe((res) => {
-          console.log(res);
-          res.forEach(function (element) {
-            element.image = {
-              url: element.img,
-            };
-          });
-          this.gatti = data;
-
-          let removeValFromIndex = [30, 40, 40];
-
-          for (var i = removeValFromIndex.length - 1; i >= 0; i--) {
-            this.gatti.splice(removeValFromIndex[i], 1);
-          }
-          this.gatti.forEach(function (element) {
-            element.like = 1;
-            element.dislike = 1;
-          });
-          this.gatti.splice(62);
-
-          this.gatti = this.getRandomCats(this.gatti);
-          this.gatti = this.gatti.concat(res);
-          console.log(this.gatti);
+    this.gattis2
+      .getCatList()
+      .valueChanges()
+      .subscribe((res) => {
+        console.log(res);
+        this.gatti = res;
+        res.forEach(function (element) {
+          // element.image = {
+          //   url: element.img,
+          // };
+          // let removeValFromIndex = [30, 40, 40];
+          // this.gatti.forEach(function (element) {
+          //   element.like = 1;
+          //   element.dislike = 1;
+          // });
+          // this.gatti.splice(62);
         });
-    });
+        this.gatti = this.getRandomCats(this.gatti);
+        this.gatti = this.gatti.concat(res);
+        console.log(this.gatti);
+      });
   }
 
   // gatti delle    apiiiiiiiiiiiiiiiiiiiiii     NON db
