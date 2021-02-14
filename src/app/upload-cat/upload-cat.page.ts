@@ -13,7 +13,6 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
-import { url } from 'inspector';
 
 @Component({
   selector: 'app-upload-cat',
@@ -105,6 +104,7 @@ export class UploadCatPage implements OnInit {
               description: [this.bookingForm.value.description],
               img: [resp],
               origin: [this.bookingForm.value.origin],
+              age: [this.bookingForm.value.age],
               // peculiarity: [],
             });
             this.imagePath = resp;
@@ -142,6 +142,7 @@ export class UploadCatPage implements OnInit {
   ngOnInit() {
     this.bookingForm = this.fb.group({
       name: [''],
+      age: [''],
       description: [''],
       origin: [''],
       img: [''],

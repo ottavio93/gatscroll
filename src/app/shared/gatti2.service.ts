@@ -19,6 +19,7 @@ export class Gatti2Service {
   createCat(gatto: Gatto) {
     return this.bookingListRef.push({
       name: gatto.name,
+      age: gatto.age,
       description: gatto.description,
       origin: gatto.origin,
       img: gatto.img,

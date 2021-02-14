@@ -1,15 +1,17 @@
+
+
+<!-- [routerLink]="'/' + gatto.name" -->
+<ion-content overflow-scroll="true" style="  height: 98%; overflow-x: hidden; overflow-y:hidden;">
 <ion-header>
   <app-header></app-header>
 </ion-header>
+<div style="margin: auto;
+ width: 38em;">
 
-<!-- [routerLink]="'/' + gatto.name" -->
-<ion-content overflow-scroll="true" style="max-width: 38em;     height: 98%; overflow-x: hidden; overflow-y:hidden;">
-
-
-  <ion-card overflow-scroll="true" 
+  <ion-card overflow-scroll="true"  style="width: 41em; top: 6em;"
     *ngFor="let gatto of gatti   index as i;first as isFirst" class="statica noselect">
     <!-- [routerLink]="['/gatto', gatto.name]" -->
-    <div (click)="toggleDetailsCard()">
+    <div (click)="toggleDetailsCard()" >
       <img [ngStyle]="{'height': hiddenDetails ? '33em' : '44em'}" overflow-scroll="true" [src]="gatto.image.url"
         class="noselect">
   
@@ -20,14 +22,17 @@
         <div id="dislikes" [style.width]="  this.gatti[i].barDislikes"></div>
       </div>
 
-      <ion-card-title class=" title noselect" [ngStyle]="{'top': hiddenDetails ? '10em' : '13.8em'}">
-        {{gatto.name}}</ion-card-title>
+      <ion-card-title class=" title noselect" [ngStyle]="{'top': hiddenDetails ? ' 9.3em' : '12.8em'}">
+        {{gatto.name}}  <span style="    font-weight: 400;
+    font-size: 0.71em;">{{gatto.age}}</span>   </ion-card-title>
       <ion-card-subtitle class="subtitle noselect" [ngStyle]="{'top': hiddenDetails ? '31em' : '41.2em'}">
         {{gatto.origin}}</ion-card-subtitle>
 
       <div *ngIf="hiddenDetails">
-        <ion-card-subtitle *ngFor="let carattere of gatto.peculiarity " style="    display: inline-flex;">
-          <p style="color: red; "> {{carattere}}</p>
+        <ion-card-subtitle *ngFor="let carattere of gatto.peculiarity " style="  margin-left: 0.5em;   display: inline-flex;">
+          <p style="       border-radius: 70px;    color: #fafafa;
+    padding: 0.31em;
+    background-color: darkseagreen; "> {{carattere}}</p>
         </ion-card-subtitle>
    
         <ion-card-subtitle class="noselect testo">{{gatto.description}}</ion-card-subtitle>
@@ -51,5 +56,5 @@
 
 
   </ion-card>
-
+</div>
 </ion-content>

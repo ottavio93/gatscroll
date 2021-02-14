@@ -106,6 +106,7 @@ export class HomePage implements AfterViewInit, OnInit {
               'transform',
               'rotate(+20deg)translateX(700px)'
             );
+            this.rederer.setStyle(card.nativeElement, 'display', 'none');
             // card.nativeElement.style.transform = `translateX(${
             //   +this.platform.width() * 4
             // }px) rotate (${ev.deltaX / 1.4}deg)`;
@@ -117,17 +118,16 @@ export class HomePage implements AfterViewInit, OnInit {
             this.rederer.setStyle(
               card.nativeElement,
               'transform',
-              'rotate(-10deg)translateX(-700px)'
+              'rotate(-20deg)translateX(-700px)'
             );
-            // card.nativeElement.style.transform = `translateX(${
-            //   +this.platform.width() * 4
-            // }px) rotate (-${ev.deltaX / 2}deg)`;
+            this.rederer.setStyle(card.nativeElement, 'display', 'none');
+
             this.putDislike(i);
             this.gatti.splice(i, 1);
-            this.hiddenDetails = false;
           } else {
             card.nativeElement.style.transform = '';
           }
+          this.hiddenDetails = false;
         },
       });
       this.gatti[i].barLikes = '50' + '%';

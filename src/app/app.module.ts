@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GattiService } from './shared/gatti.service';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { HeaderComponent } from './header/header.component';
-import { SongPageModule } from './song/song.module';
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
@@ -38,7 +38,7 @@ import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    SongPageModule,
+
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     BrowserAnimationsModule,
