@@ -1,60 +1,60 @@
-
-
-<!-- [routerLink]="'/' + gatto.name" -->
-<ion-content overflow-scroll="true" style="  height: 98%; overflow-x: hidden; overflow-y:hidden;">
 <ion-header>
   <app-header></app-header>
 </ion-header>
-<div style="margin: auto;
+
+<!-- [routerLink]="'/' + gatto.name" -->
+<ion-content overflow-scroll="true" style="  height: 98%; overflow-x: hidden; overflow-y:hidden;">
+
+  <div style="margin: auto;
  width: 38em;">
 
-  <ion-card overflow-scroll="true"  style="width: 41em; top: 6em;"
-    *ngFor="let gatto of gatti   index as i;first as isFirst" class="statica noselect">
-    <!-- [routerLink]="['/gatto', gatto.name]" -->
-    <div (click)="toggleDetailsCard()" >
-      <img [ngStyle]="{'height': hiddenDetails ? '33em' : '44em'}" overflow-scroll="true" [src]="gatto.image.url"
-        class="noselect">
-  
-    <div id="all">
-      <div id="bar">
-        <div id="likes" [style.width]="  this.gatti[i].barLikes"></div>
+    <ion-card overflow-scroll="true" style="width: 41em; top: 5em;"
+      *ngFor="let gatto of gatti   index as i;first as isFirst" class="statica noselect">
+      <!-- [routerLink]="['/gatto', gatto.name]" -->
+      <div (click)="toggleDetailsCard()">
+  <img [ngStyle]="{'height': hiddenDetails ? '33em' : '44em'}" overflow-scroll="true" [src]="gatto.img"
+          class="noselect">
+        <div id="all">
+          <div id="bar">
+            <div id="likes" [style.width]="  this.gatti[i].barLikes"></div>
 
-        <div id="dislikes" [style.width]="  this.gatti[i].barDislikes"></div>
-      </div>
+            <div id="dislikes" [style.width]="  this.gatti[i].barDislikes"></div>
+          </div>
 
-      <ion-card-title class=" title noselect" [ngStyle]="{'top': hiddenDetails ? ' 9.3em' : '12.8em'}">
-        {{gatto.name}}  <span style="    font-weight: 400;
-    font-size: 0.71em;">{{gatto.age}}</span>   </ion-card-title>
-      <ion-card-subtitle class="subtitle noselect" [ngStyle]="{'top': hiddenDetails ? '31em' : '41.2em'}">
-        {{gatto.origin}}</ion-card-subtitle>
+          <ion-card-title class=" title noselect" [ngStyle]="{'top': hiddenDetails ? ' 9.3em' : '12.8em'}">
+            {{gatto.name}} <span style="font-weight: 400;
+          font-size: 0.71em;">{{gatto.age}}</span> </ion-card-title>
+          <ion-card-subtitle class="subtitle noselect" [ngStyle]="{'top': hiddenDetails ? '31em' : '41.2em'}">
+            {{gatto.origin}}</ion-card-subtitle>
 
-      <div *ngIf="hiddenDetails">
-        <ion-card-subtitle *ngFor="let carattere of gatto.peculiarity " style="  margin-left: 0.5em;   display: inline-flex;">
-          <p style="       border-radius: 70px;    color: #fafafa;
+          <div *ngIf="hiddenDetails">
+            <ion-card-subtitle *ngFor="let carattere of gatto.peculiarity "
+              style="  margin-left: 0.5em;   display: inline-flex;">
+              <p style="border-radius: 70px;    color: #fafafa;
     padding: 0.31em;
     background-color: darkseagreen; "> {{carattere}}</p>
-        </ion-card-subtitle>
-   
-        <ion-card-subtitle class="noselect testo">{{gatto.description}}</ion-card-subtitle>
-        <ion-card-subtitle class="noselect testo">{{gatto.temperament}}</ion-card-subtitle>
- 
-      </div>
+            </ion-card-subtitle>
 
-    </div>
+            <ion-card-subtitle class="noselect testo">{{gatto.description}}</ion-card-subtitle>
+            <ion-card-subtitle class="noselect testo">{{gatto.temperament}}</ion-card-subtitle>
 
+          </div>
 
-      </div>
-    <ion-card-subtitle>
-      <div class="center">
-        <button value="Like" style="color: green; margin-right: 5%;" id="likeButton" (click)="putLike(i)"><i
-            class="fa fa-heart fa-3x"></i></button>
-        <button value="Dislike" style="color: red;" id="dislikeButton" (click)="putDislike(i)">
-          <i class="fa fa-times fa-3x"></i></button>
+        </div>
+
 
       </div>
-    </ion-card-subtitle>
+      <ion-card-subtitle>
+        <div class="center">
+          <button value="Like" style="color: green; margin-right: 5%;" id="likeButton" (click)="putLike(i)"><i
+              class="fa fa-heart fa-3x"></i></button>
+          <button value="Dislike" style="color: red;" id="dislikeButton" (click)="putDislike(i)">
+            <i class="fa fa-times fa-3x"></i></button>
+
+        </div>
+      </ion-card-subtitle>
 
 
-  </ion-card>
-</div>
+    </ion-card>
+  </div>
 </ion-content>
