@@ -1,5 +1,11 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   MatAutocompleteSelectedEvent,
@@ -23,13 +29,17 @@ export class CaratteristicheGattoComponent {
   fruitCtrl = new FormControl();
   filteredCaratteri: Observable<string[]>;
   caratteristiche: string[] = [];
+
   allFruits: string[] = [
     'tenerone',
     'miagoloso',
     'indifferente',
     'cattivo',
     'giocoso',
+    'fabiesco',
   ];
+  @Output()
+  notify: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -57,6 +67,9 @@ export class CaratteristicheGattoComponent {
     }
 
     this.fruitCtrl.setValue(null);
+    this.notify.emit(this.caratteristiche);
+
+    console.log(this.caratteristiche);
   }
 
   remove(fruit: string): void {
@@ -71,6 +84,9 @@ export class CaratteristicheGattoComponent {
     this.caratteristiche.push(event.option.viewValue);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
+    console.log(this.caratteristiche);
+    this.notify.emit(this.caratteristiche);
+    console.log(this.notify);
   }
 
   private _filter(value: string): string[] {

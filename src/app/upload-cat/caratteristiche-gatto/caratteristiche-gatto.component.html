@@ -2,7 +2,7 @@
 <mat-form-field class="example-chip-list" >
   <mat-label>Peculiarity </mat-label>
   <mat-chip-list #chipList aria-label="Fruit selection" >
-    <mat-chip  *ngFor="let carattere of caratteristiche" [selectable]="selectable" [removable]="removable" (removed)="remove(fruit)">
+    <mat-chip  *ngFor="let carattere of caratteristiche" [selectable]="selectable" [removable]="removable" (removed)="remove(carattere)">
       {{carattere}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
@@ -12,7 +12,7 @@
   </mat-chip-list>
   
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-    <mat-option *ngFor="let carattere of filteredCaratteri | async" [value]="fruit">
+    <mat-option *ngFor="let carattere of filteredCaratteri | async" [value]="carattere">
       {{carattere}}
     </mat-option>
    

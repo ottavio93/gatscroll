@@ -184,6 +184,7 @@ export class HomePage implements AfterViewInit, OnInit {
             element.dislike = 1;
           });
           this.gatti.splice(62);
+
           this.gatti = this.getRandomCats(this.gatti);
           this.gatti = this.gatti.concat(res);
           console.log(this.gatti);

@@ -13,6 +13,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
+import { url } from 'inspector';
 
 @Component({
   selector: 'app-upload-cat',
@@ -24,7 +25,7 @@ export class UploadCatPage implements OnInit {
   bookingForm: FormGroup;
   // File upload task
   fileUploadTask: AngularFireUploadTask;
-
+  imagePath: string;
   // Upload progress
   percentageVal: Observable<number>;
 
@@ -38,11 +39,11 @@ export class UploadCatPage implements OnInit {
   // Image specifications
   imgName: string;
   imgSize: number;
-
+  resp;
   // File uploading status
   isFileUploading: boolean;
   isFileUploaded: boolean;
-
+  perco = '';
   private filesCollection: AngularFirestoreCollection<Gatto['img']>;
 
   constructor(
@@ -103,9 +104,13 @@ export class UploadCatPage implements OnInit {
               name: [this.bookingForm.value.name],
               description: [this.bookingForm.value.description],
               img: [resp],
+              origin: [this.bookingForm.value.origin],
+              // peculiarity: [],
             });
+            this.imagePath = resp;
             console.log(resp);
-            console.log(this.bookingForm);
+
+            console.log(this.bookingForm.value.img);
             this.isFileUploading = false;
             this.isFileUploaded = true;
           },
@@ -118,7 +123,6 @@ export class UploadCatPage implements OnInit {
         this.imgSize = snap.totalBytes;
       })
     );
-    return this.fileStoragePath;
   }
 
   storeFilesFirebase(image: Gatto['img']) {
@@ -139,26 +143,38 @@ export class UploadCatPage implements OnInit {
     this.bookingForm = this.fb.group({
       name: [''],
       description: [''],
-
+      origin: [''],
       img: [''],
+      peculiarity: [''],
     });
 
     this.fetchBookings();
     let bookingRes = this.aptService.getCatList();
     bookingRes.snapshotChanges().subscribe((res) => {
       this.gatti = [];
+
       res.forEach((item) => {
         let a = item.payload.toJSON();
+
+        // a.peculiarity = this.peculiar;
         a['$key'] = item.key;
-        this.gatti.push(a as Gatto);
+        // this.gatti.push(a as Gatto);
       });
     });
   }
-
+  peculiar: any;
+  selected(date: any): void {
+    console.log('Picked date: ', date);
+    this.peculiar = date;
+  }
   formSubmit() {
     if (!this.bookingForm.valid) {
       return false;
     } else {
+      console.log(this.imagePath);
+      // console.log(this.bookingForm.value);
+      this.bookingForm.value.peculiarity = this.peculiar;
+      console.log(this.bookingForm.value.peculiarity);
       this.aptService
         .createCat(this.bookingForm.value)
         .then((res) => {

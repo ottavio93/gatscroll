@@ -26,9 +26,13 @@
         {{gatto.origin}}</ion-card-subtitle>
 
       <div *ngIf="hiddenDetails">
+        <ion-card-subtitle *ngFor="let carattere of gatto.peculiarity " style="    display: inline-flex;">
+          <p style="color: red; "> {{carattere}}</p>
+        </ion-card-subtitle>
+   
         <ion-card-subtitle class="noselect testo">{{gatto.description}}</ion-card-subtitle>
         <ion-card-subtitle class="noselect testo">{{gatto.temperament}}</ion-card-subtitle>
-
+ 
       </div>
 
     </div>

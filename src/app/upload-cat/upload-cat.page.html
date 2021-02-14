@@ -13,25 +13,31 @@
 <mat-chip-list></mat-chip-list>
 
   <ion-list lines="full">
-    <mat-chip-list></mat-chip-list>
+
     <form [formGroup]="bookingForm" (ngSubmit)="formSubmit()">
     
       <ion-item>
         <ion-label position="floating">Name</ion-label>
         <ion-input formControlName="name" type="text" required></ion-input>
       </ion-item>
-  
+        <ion-item>
+          <app-caratteristiche-gatto (notify)="selected($event)"></app-caratteristiche-gatto>
+        </ion-item> 
+        <ion-item>
+          <ion-label position="floating">origin</ion-label>
+          <ion-input formControlName="origin" type="text" >
+          </ion-input>
+        </ion-item>
+ 
       <ion-item>
         <ion-label position="floating">description</ion-label>
         <ion-input formControlName="description" type="text" required>
         </ion-input>
       </ion-item>
   
-      <app-caratteristiche-gatto ></app-caratteristiche-gatto>
-
         <ion-item *ngIf="!isUploading && !isUploaded">
           <ion-button color="primary" shape="round" size="medium">
-            <input type="file" (change)="uploadImage($event.target.files)" />
+            <input type="file" (change)="uploadImage($event.target.files)"  />
           </ion-button>
         </ion-item>
   <div *ngIf="percentageVal | async as percentage">
@@ -46,7 +52,7 @@
   </div>
       <ion-row>
         <ion-col>
-          <ion-button type="submit" color="primary" shape="full" expand="block">add cat</ion-button>
+          <ion-button type="submit" color="primary" shape="full" expand="block" >add cat</ion-button>
         </ion-col>
       </ion-row>
     </form>

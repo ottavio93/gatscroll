@@ -20,7 +20,9 @@ export class Gatti2Service {
     return this.bookingListRef.push({
       name: gatto.name,
       description: gatto.description,
+      origin: gatto.origin,
       img: gatto.img,
+      peculiarity: gatto.peculiarity,
       like: 1,
       dislike: 1,
     });
