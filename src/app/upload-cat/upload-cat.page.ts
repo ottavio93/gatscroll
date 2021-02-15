@@ -181,7 +181,7 @@ export class UploadCatPage implements OnInit {
         .then((res) => {
           console.log(res);
 
-          this.router.navigate(['/home']);
+          this.router.navigate(['/']);
           this.bookingForm.reset();
         })
         .catch((error) => console.log(error));

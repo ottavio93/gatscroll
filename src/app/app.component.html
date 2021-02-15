@@ -1,10 +1,24 @@
-<ion-app>
-    <app-header></app-header>
-    <ion-router-outlet></ion-router-outlet>
-</ion-app>
+
  
 
 <ion-content>
- 
+<div *ngIf="!isSignedIn">
+    <h2>Sign up</h2>
+    <input type="text" #emailSignup />
+    <input type="text" #passwordSignup />
+    <button (click)="onSignup(emailSignup.value,passwordSignup.value)">Sign up</button>
+</div>
+<hr>
+<div *ngIf="!isSignedIn">
+    <h2>Sign In</h2>
+    <input type="text" #email />
+    <input type="text" #password />
+    <button (click)="onSignin(email.value,password.value)">Sign in</button>
+</div>
+<app-home *ngIf="isSignedIn" (isLogout)="handleLogout()">
+    <app-header></app-header>
+    <ion-router-outlet></ion-router-outlet>
     <router-outlet></router-outlet>
+</app-home>
+    
 </ion-content>

@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseService {
+export class FirebaseService implements OnInit {
+  ngOnInit() {}
   isLoggedIn = false;
   constructor(public firebaseAuth: AngularFireAuth) {}
   async signin(email: string, password: string) {
@@ -25,5 +26,6 @@ export class FirebaseService {
   logout() {
     this.firebaseAuth.signOut();
     localStorage.removeItem('user');
+    this.ngOnInit();
   }
 }

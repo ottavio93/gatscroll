@@ -1,6 +1,7 @@
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 import {
+  EventEmitter,
   AfterViewInit,
   Component,
   ElementRef,
@@ -13,6 +14,9 @@ import {
 import { GestureController, IonCard, Platform } from '@ionic/angular';
 import { GattiService } from '../shared/gatti.service';
 import { Gatti2Service } from '../shared/gatti2.service';
+
+import { FirebaseService } from '../shared/firebase.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -32,13 +36,28 @@ export class HomePage implements AfterViewInit, OnInit {
   mainForm: FormGroup;
   Data: any[] = [];
   @ViewChildren(IonCard, { read: ElementRef }) cards: QueryList<ElementRef>;
+  @Output() isLogout = new EventEmitter<void>();
   constructor(
+    private router: Router,
+    public firebaseservice: FirebaseService,
     public gattis2: Gatti2Service,
     public gattis: GattiService,
     public gestureCtrl: GestureController,
     public rederer: Renderer2,
     public formBuilder: FormBuilder
   ) {}
+  logout() {
+    this.firebaseservice.logout();
+    this.isLogout.emit();
+
+    console.log('ggggg');
+
+    this.ngOnInit();
+    this.refreshPage();
+  }
+  refreshPage() {
+    window.location.reload();
+  }
 
   ngOnInit() {
     this.username = 'lino';
