@@ -162,7 +162,7 @@ export class TinderCardComponent implements AfterViewInit, OnInit {
     console.log(this.gatti[i].barLikes + 'likeeeeee' + this.gatti[i].name);
 
     // this.barLikes = this.gatti[i].barlikes;
-    this.ngOnInit();
+
     //We add the numbers on the buttons, just to show how to
     // document.getElementById('likeButton').value =
     //   'Like (' + this.like.toString() + ')';

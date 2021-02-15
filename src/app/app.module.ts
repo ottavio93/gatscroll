@@ -25,6 +25,7 @@ import {
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { FirebaseService } from './shared/firebase.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -41,6 +42,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
     BrowserAnimationsModule,
   ],
   providers: [
+    FirebaseService,
     StatusBar,
     SplashScreen,
     SQLite,

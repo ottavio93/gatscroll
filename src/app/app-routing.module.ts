@@ -28,7 +28,7 @@ const routes: Routes = [
   //   loadChildren: () =>
   //     import('./song/song.module').then((m) => m.SongPageModule),
   // },
-  { path: 'songs', component: TinderCardComponent },
+  { path: 'breeds', component: TinderCardComponent },
   {
     path: 'upload-cat',
     loadChildren: () =>
