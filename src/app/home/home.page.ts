@@ -46,15 +46,7 @@ export class HomePage implements AfterViewInit, OnInit {
     public rederer: Renderer2,
     public formBuilder: FormBuilder
   ) {}
-  logout() {
-    this.firebaseservice.logout();
-    this.isLogout.emit();
 
-    console.log('ggggg');
-
-    this.ngOnInit();
-    this.refreshPage();
-  }
   refreshPage() {
     window.location.reload();
   }
