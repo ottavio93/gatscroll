@@ -14,15 +14,4 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem('user') !== null) this.isSignedIn = true;
     else this.isSignedIn = false;
   }
-  async onSignup(email: string, password: string) {
-    await this.firebaseservice.signup(email, password);
-    if (this.firebaseservice.isLoggedIn) this.isSignedIn = true;
-  }
-  async onSignin(email: string, password: string) {
-    await this.firebaseservice.signin(email, password);
-    if (this.firebaseservice.isLoggedIn) this.isSignedIn = true;
-  }
-  handleLogout() {
-    this.isSignedIn = false;
-  }
 }

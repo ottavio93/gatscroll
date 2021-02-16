@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,4 +29,5 @@ export class FirebaseService implements OnInit {
     localStorage.removeItem('user');
     this.ngOnInit();
   }
+  /////////////////////////////////////////////////////////////// Sign in with Google
 }

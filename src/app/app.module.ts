@@ -26,8 +26,10 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FirebaseService } from './shared/firebase.service';
+import { AuthService } from './shared/auth.service';
+import { SigninComponent } from './signin/signin.component';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SigninComponent],
   entryComponents: [],
 
   imports: [
@@ -42,6 +44,7 @@ import { FirebaseService } from './shared/firebase.service';
     BrowserAnimationsModule,
   ],
   providers: [
+    AuthService,
     FirebaseService,
     StatusBar,
     SplashScreen,

@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { CatComponent } from './home/cat/cat.component';
+import { SigninComponent } from './signin/signin.component';
 import { TinderCardComponent } from './tinder-card/tinder-card.component';
 
 const routes: Routes = [
+  { path: 'sign-in', component: SigninComponent },
   {
     path: 'home',
     loadChildren: () =>
@@ -30,13 +32,16 @@ const routes: Routes = [
   // },
   { path: 'breeds', component: TinderCardComponent },
   {
-    path: 'upload-cat',
+    path: 'user',
     loadChildren: () =>
-      import('./upload-cat/upload-cat.module').then(
-        (m) => m.UploadCatPageModule
-      ),
+      import('./profile/profile.module').then((m) => m.ProfilePageModule),
   },
   { path: 'gatto/:name', component: CatComponent },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./profile/profile.module').then((m) => m.ProfilePageModule),
+  },
   // {
   //   path: 'name',
   //   loadChildren: () =>
