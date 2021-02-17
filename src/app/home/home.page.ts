@@ -29,7 +29,7 @@ export class HomePage implements AfterViewInit, OnInit {
   gatti: any;
   title = 'friends-app';
   gatti2 = this.getAllCats();
-
+  usrId: string;
   username: string = 'e daiiiiiiiii';
   like = 1;
   dislike = 1;
@@ -49,7 +49,7 @@ export class HomePage implements AfterViewInit, OnInit {
     public formBuilder: FormBuilder
   ) {}
   getUid() {
-    return this.afAuth.user.subscribe((data) => console.log(data.uid));
+    return this.afAuth.user.subscribe((data) => (this.usrId = data.uid));
   }
   refreshPage() {
     window.location.reload();
@@ -167,7 +167,14 @@ export class HomePage implements AfterViewInit, OnInit {
   // getCats() {
   //   this.gattis.getAllCats().subscribe((data) => console.log(data));
   // }
+  deleteUserItems(msg: string, array: any[]) {
+    const index: any = array.indexOf(msg);
+    let item = array.map((data) => {
+      data.userId;
+    });
 
+    return item;
+  }
   getAllCats() {
     this.gattis2
       .getCatList()
@@ -175,7 +182,12 @@ export class HomePage implements AfterViewInit, OnInit {
       .subscribe((res) => {
         console.log(res);
         this.gatti = res;
-
+        console.log(this.usrId);
+        // this.gatti = this.deleteUserItems(this.usrId, this.gatti);
+        let item = this.gatti.map((data) => {
+          data;
+        });
+        this.gatti.splice(this.usrId, 1);
         this.gatti = this.getRandomCats(this.gatti);
 
         console.log(this.gatti);
