@@ -25,6 +25,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class HomePage implements AfterViewInit, OnInit {
   longPressActive = false;
+  notlikedCats = new Array();
+  likedCats = new Array();
   currentItem = 'Television';
   gatti: any;
   title = 'friends-app';
@@ -111,13 +113,16 @@ export class HomePage implements AfterViewInit, OnInit {
 
           if (ev.deltaX > 100) {
             this.putLike(i);
+            this.likedCats.push(this.gatti[i]);
+            // this.likedCats.push(this.gatti[i]);
             this.gatti.splice(i, 1);
+
             this.rederer.setStyle(
               card.nativeElement,
               'transform',
               'rotate(+20deg)translateX(700px)'
             );
-
+            console.log(this.likedCats);
             // this.rederer.setStyle(card.nativeElement, 'display', 'none');
             // card.nativeElement.style.transform = `translateX(${
             //   +this.platform.width() * 4
@@ -126,12 +131,15 @@ export class HomePage implements AfterViewInit, OnInit {
             this.hiddenDetails = false;
           } else if (ev.deltaX < -100) {
             this.putDislike(i);
+
+            this.notlikedCats.push(this.gatti[i]);
             this.gatti.splice(i, 1);
             this.rederer.setStyle(
               card.nativeElement,
               'transform',
               'rotate(-20deg)translateX(-700px)'
             );
+            console.log(this.notlikedCats);
             // this.rederer.setStyle(card.nativeElement, 'display', 'none');
           } else {
             card.nativeElement.style.transform = '';
@@ -164,9 +172,6 @@ export class HomePage implements AfterViewInit, OnInit {
     }
   }
 
-  // getCats() {
-  //   this.gattis.getAllCats().subscribe((data) => console.log(data));
-  // }
   deleteUserItems(msg: string, array: any[]) {
     const index: any = array.indexOf(msg);
     let item = array.map((data) => {
@@ -184,11 +189,14 @@ export class HomePage implements AfterViewInit, OnInit {
         this.gatti = res;
         console.log(this.usrId);
         // this.gatti = this.deleteUserItems(this.usrId, this.gatti);
-        let item = this.gatti.map((data) => {
-          data;
-        });
-        this.gatti.splice(this.usrId, 1);
-        this.gatti = this.getRandomCats(this.gatti);
+        let notUserCats: any[] = [];
+        for (let index = 0; index < this.gatti.length; index++) {
+          if (this.gatti[index].userId != this.usrId) {
+            notUserCats.push(this.gatti[index]);
+          }
+        }
+
+        this.gatti = this.getRandomCats(notUserCats);
 
         console.log(this.gatti);
       });
