@@ -5,26 +5,28 @@
 
     
     </div  >
-    <div *ngIf="!isSignedIn">
-      <h2>Sign In</h2>
-      <div>
+    <div *ngIf="!isSignedIn" style="width: 20em;">
+     
+      <div style="background-color:aliceblue;padding-left:1em;">
+        <h3>Sign In</h3>
       <input type="text" #email placeholder="Email" />
       <input type="text" #password placeholder="Password" />
       <button (click)="onSignin(email.value,password.value)">Sign in</button>
           <hr>
           </div>
-        <button type="button" (click)="authService.GoogleAuth()">
-          Log in with Google
-        </button>
+      
             <hr>
+            <div style="background-color:aliceblue;padding-left:1em;padding-bottom: 2em;">
 <h2>Sign up</h2>
 <input type="text" #emailSignup placeholder="Email" />
 <input type="text" #passwordSignup placeholder="Password" />
-<button (click)="onSignup(emailSignup.value,passwordSignup.value)">Sign up</button>
+<button (click)="onSignup(emailSignup.value,passwordSignup.value)" style="padding: 15px 13px;">Sign up</button>
 
-
+  <button type="button" (click)="authService.GoogleAuth()"  style="padding: 15px 13px;">
+    Log in with Google
+  </button>
     </div>
-
+</div>
     <div class="formGroup">
     
 

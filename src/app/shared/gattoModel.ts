@@ -1,5 +1,6 @@
 export class Gatto {
   $key: string;
+  userId: string;
   name: string;
   age: number;
   like: number = 0;

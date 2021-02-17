@@ -13,6 +13,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-upload-cat',
@@ -30,7 +31,7 @@ export class UploadCatPage implements OnInit {
 
   // Track file uploading with snapshot
   trackSnapshot: Observable<any>;
-
+  id: string;
   // Uploaded File URL
   UploadedImageURL: Observable<string>;
   // Uploaded image collection
@@ -46,6 +47,7 @@ export class UploadCatPage implements OnInit {
   private filesCollection: AngularFirestoreCollection<Gatto['img']>;
 
   constructor(
+    public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage,
     private aptService: Gatti2Service,
@@ -60,6 +62,7 @@ export class UploadCatPage implements OnInit {
     this.files = this.filesCollection.valueChanges();
   }
   fileStoragePath;
+
   uploadImage(event: FileList) {
     const file = event.item(0);
 
@@ -140,8 +143,12 @@ export class UploadCatPage implements OnInit {
   }
 
   ngOnInit() {
+    this.afAuth.user.subscribe((data) => (this.id = data.uid));
+    console.log(this.id);
+
     this.bookingForm = this.fb.group({
       name: [''],
+      userId: [''],
       age: [''],
       description: [''],
       origin: [''],
@@ -174,6 +181,7 @@ export class UploadCatPage implements OnInit {
     } else {
       console.log(this.imagePath);
       // console.log(this.bookingForm.value);
+      this.bookingForm.value.userId = this.id;
       this.bookingForm.value.peculiarity = this.peculiar;
       console.log(this.bookingForm.value.peculiarity);
       this.aptService

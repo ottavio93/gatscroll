@@ -6,8 +6,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class FirebaseService implements OnInit {
   ngOnInit() {}
+
   isLoggedIn = false;
   constructor(public firebaseAuth: AngularFireAuth) {}
+
   async signin(email: string, password: string) {
     await this.firebaseAuth
       .signInWithEmailAndPassword(email, password)
@@ -29,5 +31,10 @@ export class FirebaseService implements OnInit {
     localStorage.removeItem('user');
     this.ngOnInit();
   }
+  // async getUserId() {
+  //   let uid = (await this.firebaseAuth.currentUser).uid;
+  //   console.log(uid);
+  //   return uid + 'ggggggggggggggggggggggggggg';
+  // }
   /////////////////////////////////////////////////////////////// Sign in with Google
 }

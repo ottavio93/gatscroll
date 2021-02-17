@@ -26,6 +26,7 @@ export class Gatti2Service {
       peculiarity: gatto.peculiarity,
       like: 1,
       dislike: 1,
+      userId: gatto.userId,
     });
   }
 

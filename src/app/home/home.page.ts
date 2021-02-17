@@ -17,6 +17,7 @@ import { Gatti2Service } from '../shared/gatti2.service';
 
 import { FirebaseService } from '../shared/firebase.service';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -39,6 +40,7 @@ export class HomePage implements AfterViewInit, OnInit {
   @Output() isLogout = new EventEmitter<void>();
   constructor(
     private router: Router,
+    public afAuth: AngularFireAuth,
     public firebaseservice: FirebaseService,
     public gattis2: Gatti2Service,
     public gattis: GattiService,
@@ -46,13 +48,16 @@ export class HomePage implements AfterViewInit, OnInit {
     public rederer: Renderer2,
     public formBuilder: FormBuilder
   ) {}
-
+  getUid() {
+    return this.afAuth.user.subscribe((data) => console.log(data.uid));
+  }
   refreshPage() {
     window.location.reload();
   }
 
   ngOnInit() {
     this.username = 'lino';
+    this.getUid();
   }
 
   ngAfterViewInit() {
@@ -170,19 +175,9 @@ export class HomePage implements AfterViewInit, OnInit {
       .subscribe((res) => {
         console.log(res);
         this.gatti = res;
-        res.forEach(function (element) {
-          // element.image = {
-          //   url: element.img,
-          // };
-          // let removeValFromIndex = [30, 40, 40];
-          // this.gatti.forEach(function (element) {
-          //   element.like = 1;
-          //   element.dislike = 1;
-          // });
-          // this.gatti.splice(62);
-        });
+
         this.gatti = this.getRandomCats(this.gatti);
-        this.gatti = this.gatti.concat(res);
+
         console.log(this.gatti);
       });
   }
