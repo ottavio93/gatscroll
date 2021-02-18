@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { FirebaseService } from '../shared/firebase.service';
 
@@ -10,6 +11,7 @@ import { FirebaseService } from '../shared/firebase.service';
 })
 export class SigninComponent implements OnInit {
   constructor(
+    private router: Router,
     public authService: AuthService,
     public firebaseservice: FirebaseService,
     public afAuth: AngularFireAuth
@@ -30,7 +32,6 @@ export class SigninComponent implements OnInit {
   async onSignin(email: string, password: string) {
     await this.firebaseservice.signin(email, password);
     if (this.firebaseservice.isLoggedIn) this.isSignedIn = true;
-    window.location.reload();
   }
   handleLogout() {
     this.isSignedIn = false;
