@@ -54,7 +54,7 @@ export class SigninComponent implements OnInit {
     await this.firebaseservice.signup(email, password);
     if (this.firebaseservice.isLoggedIn) this.isSignedIn = true;
     this.afAuth.user.subscribe((data) => (this.id = data.uid));
-    console.log(this.id);
+    console.log(this.id) + 'gfgfgfgfgfgfgfgfgf';
 
     console.log(this.afAuth.currentUser);
     // this.addUser({
@@ -65,7 +65,7 @@ export class SigninComponent implements OnInit {
     // this.createuser(nikname, this.afAuth.currentUser);
     this.getUid();
     this.submitStudentData();
-    this.ngOnInit();
+    // this.ngOnInit();
   }
   async onSignin(email: string, password: string) {
     await this.firebaseservice.signin(email, password);
@@ -89,8 +89,12 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  submitStudentData() {
+  async submitStudentData() {
+    let userId = (await this.afAuth.currentUser).uid;
+    console.log(userId);
+    this.afAuth.user.subscribe((data) => (this.id = data.uid));
     console.log(this.userinoForm.value);
+    this.userinoForm.value.userId = userId;
     this.firebaseservice.createUser(this.userinoForm.value); // Submit student data using CRUD API
 
     this.ResetForm(); // Reset form when clicked on reset button

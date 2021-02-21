@@ -59,11 +59,12 @@ export class FirebaseService implements OnInit {
 
   createUser(user: User) {
     console.log(user.nikname);
+    console.log(user.userId);
     this.bookingListRef = this.firebase.list('/userini');
     if (user) {
       this.bookingListRef.push({
         nickname: user.nikname,
-
+        userId: user.userId,
         // userId: user.userId,
       });
     }
