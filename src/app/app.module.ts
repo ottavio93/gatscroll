@@ -22,17 +22,32 @@ import {
   MatChipsModule,
   MAT_CHIPS_DEFAULT_OPTIONS,
 } from '@angular/material/chips';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { DatePipe } from '@angular/common';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FirebaseService } from './shared/firebase.service';
 import { AuthService } from './shared/auth.service';
 import { SigninComponent } from './signin/signin.component';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 @NgModule({
   declarations: [AppComponent, SigninComponent],
   entryComponents: [],
 
   imports: [
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     MatChipsModule,
     BrowserModule,
     IonicModule.forRoot(),
@@ -42,8 +57,20 @@ import { SigninComponent } from './signin/signin.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatSnackBarModule,
+    MatSidenavModule,
   ],
   providers: [
+    DatePipe,
     AuthService,
     FirebaseService,
     StatusBar,
