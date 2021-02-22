@@ -1,6 +1,10 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import {
+  AngularFireDatabase,
+  AngularFireList,
+  AngularFireObject,
+} from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { User } from './userModel';
@@ -11,6 +15,7 @@ import { User } from './userModel';
 export class FirebaseService implements OnInit {
   ngOnInit() {}
   bookingListRef: AngularFireList<any>;
+  gattoRef: AngularFireObject<any>;
   isLoggedIn = false;
   constructor(
     private firebase: AngularFireDatabase,
@@ -25,6 +30,7 @@ export class FirebaseService implements OnInit {
       .then((res) => {
         this.isLoggedIn = true;
         localStorage.setItem('user', JSON.stringify(res.user));
+
         location.href = '/home';
         this.router.navigate(['/home']);
       });
@@ -35,6 +41,7 @@ export class FirebaseService implements OnInit {
       .then((res) => {
         this.isLoggedIn = true;
         localStorage.setItem('user', JSON.stringify(res.user));
+        localStorage.setItem('uid', JSON.stringify(res.user.uid));
         this.router.navigate(['/home']);
       });
     location.href = '/home';
@@ -59,14 +66,41 @@ export class FirebaseService implements OnInit {
 
   createUser(user: User) {
     console.log(user.nikname);
-    console.log(user.userId);
+    console.log(localStorage.getItem('uid'));
+    localStorage.setItem('username', user.nikname);
     this.bookingListRef = this.firebase.list('/userini');
     if (user) {
       this.bookingListRef.push({
         nickname: user.nikname,
-        userId: user.userId,
+        userId: JSON.parse(localStorage.getItem('uid')),
+
         // userId: user.userId,
       });
     }
+  }
+
+  // getUser(user: User) {
+  //   console.log(user.nikname);
+  //   console.log(user.userId);
+  //   this.bookingListRef = this.firebase.list('/userini');
+  //   if (user) {
+  //     this.bookingListRef.push({
+  //       nickname: user.nikname,
+  //       userId: user.userId,
+  //       // userId: user.userId,
+  //     });
+  //   }
+  // }
+
+  getUser(id: string) {
+    this.gattoRef = this.firebase.object('/userini/' + id);
+    console.log(this.gattoRef);
+    return this.gattoRef;
+  }
+
+  putUserMatches(user: User) {
+    this.gattoRef.update({
+      userMatches: user.userMatches,
+    });
   }
 }

@@ -50,11 +50,11 @@ export class SigninComponent implements OnInit {
   }
 
   async onSignup(email: string, password: string) {
-    console.log(localStorage.getItem('user'));
     await this.firebaseservice.signup(email, password);
     if (this.firebaseservice.isLoggedIn) this.isSignedIn = true;
     this.afAuth.user.subscribe((data) => (this.id = data.uid));
-    console.log(this.id) + 'gfgfgfgfgfgfgfgfgf';
+    console.log(this.id);
+    console.log(localStorage.getItem('uid'));
 
     console.log(this.afAuth.currentUser);
     // this.addUser({
@@ -90,14 +90,13 @@ export class SigninComponent implements OnInit {
   }
 
   async submitStudentData() {
-    let userId = (await this.afAuth.currentUser).uid;
-    console.log(userId);
-    this.afAuth.user.subscribe((data) => (this.id = data.uid));
+    console.log(localStorage.getItem('uid'));
+    let id = localStorage.getItem('uid');
     console.log(this.userinoForm.value);
-    this.userinoForm.value.userId = userId;
+    // this.userinoForm.value.userId = id;
     this.firebaseservice.createUser(this.userinoForm.value); // Submit student data using CRUD API
 
-    this.ResetForm(); // Reset form when clicked on reset button
+    // this.ResetForm(); // Reset form when clicked on reset button
   }
 
   // async createuser(userino: User) {

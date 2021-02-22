@@ -104,6 +104,7 @@ export class HomePage implements AfterViewInit, OnInit {
             'transform',
             `translateX(${ev.deltaX}px)rotate(${ev.deltaX / 10}deg)`
           );
+
           // card.nativeElement.style.transform = `translateX(${
           //   ev.deltaX
           // }px) rotate(${ev.deltaX / 10}deg)`;
@@ -113,8 +114,16 @@ export class HomePage implements AfterViewInit, OnInit {
 
           if (ev.deltaX > 100) {
             this.putLike(i);
+            console.log(this.gatti[i].userId);
             this.likedCats.push(this.gatti[i]);
             // this.likedCats.push(this.gatti[i]);
+            let user = this.firebaseservice
+              .getUser(this.username)
+              .snapshotChanges()
+              .subscribe((data) => {
+                console.log(data.payload.val);
+              });
+            console.log(user);
             this.gatti.splice(i, 1);
 
             this.rederer.setStyle(
@@ -131,8 +140,15 @@ export class HomePage implements AfterViewInit, OnInit {
             this.hiddenDetails = false;
           } else if (ev.deltaX < -100) {
             this.putDislike(i);
-
+            console.log(this.gatti[i].userId);
             this.notlikedCats.push(this.gatti[i]);
+            let user = this.firebaseservice
+              .getUser(this.username)
+              .snapshotChanges()
+              .subscribe((data) => {
+                console.log(data);
+              });
+            console.log(user);
             this.gatti.splice(i, 1);
             this.rederer.setStyle(
               card.nativeElement,
