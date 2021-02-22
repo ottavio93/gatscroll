@@ -42,15 +42,13 @@ export class FirebaseService implements OnInit {
         this.isLoggedIn = true;
         localStorage.setItem('user', JSON.stringify(res.user));
         localStorage.setItem('uid', JSON.stringify(res.user.uid));
-        this.router.navigate(['/home']);
+        // this.router.navigate(['/home']);
       });
-    location.href = '/home';
-    this.ngOnInit();
   }
   logout() {
     this.firebaseAuth.signOut();
     localStorage.removeItem('user');
-    this.ngOnInit();
+    // this.ngOnInit();
   }
   // async getUserId() {
   //   let uid = (await this.firebaseAuth.currentUser).uid;
@@ -67,16 +65,13 @@ export class FirebaseService implements OnInit {
   createUser(user: User) {
     console.log(user.nikname);
     console.log(localStorage.getItem('uid'));
-    localStorage.setItem('username', user.nikname);
+    // localStorage.setItem('username', user.nikname);
     this.bookingListRef = this.firebase.list('/userini');
-    if (user) {
-      this.bookingListRef.push({
-        nickname: user.nikname,
-        userId: JSON.parse(localStorage.getItem('uid')),
 
-        // userId: user.userId,
-      });
-    }
+    this.bookingListRef.push({
+      userId: JSON.parse(localStorage.getItem('uid')),
+      nickname: user.nikname,
+    });
   }
 
   // getUser(user: User) {

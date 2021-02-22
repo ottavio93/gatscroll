@@ -32,7 +32,7 @@
           <input type="text" #emailSignup placeholder="Email" />
           <input type="text" #passwordSignup placeholder="Password" />
           <!-- <input type="text" #niknameSignup placeholder="nikname" /> -->
-          <form [formGroup]="userinoForm" (ngSubmit)="submitStudentData()" novalidate>
+          <form [formGroup]="userinoForm"  novalidate>
             <ion-item>
              
   <ion-input type="text" formControlName="nikname" class="form-control" required placeholder="username"></ion-input>
@@ -40,7 +40,7 @@
           </ion-item>
 </form>
           
-          <button (click)="onSignup(emailSignup.value,passwordSignup.value);submitStudentData()"
+          <button (click)="onSignup(emailSignup.value,passwordSignup.value)"
             style="padding: 15px 13px;">Sign up</button>
 
           <button type="button" (click)="authService.GoogleAuth()" style="padding: 15px 13px;">
