@@ -16,6 +16,7 @@ export class FirebaseService implements OnInit {
   ngOnInit() {}
   bookingListRef: AngularFireList<any>;
   gattoRef: AngularFireObject<any>;
+  gattoRefUser: AngularFireObject<any>;
   isLoggedIn = false;
   constructor(
     private firebase: AngularFireDatabase,
@@ -65,7 +66,7 @@ export class FirebaseService implements OnInit {
   createUser(user: User) {
     console.log(user.nikname);
     console.log(localStorage.getItem('uid'));
-    // localStorage.setItem('username', user.nikname);
+    localStorage.setItem('username', user.nikname);
     this.bookingListRef = this.firebase.list('/userini');
 
     this.bookingListRef.push({
@@ -93,9 +94,11 @@ export class FirebaseService implements OnInit {
     return this.gattoRef;
   }
 
-  putUserMatches(user: User) {
+  putUserMatches(id: string, userId: string) {
+    this.gattoRef = this.firebase.object('/userini/' + userId);
+
     this.gattoRef.update({
-      userMatches: user.userMatches,
+      userMatches: id,
     });
   }
 }

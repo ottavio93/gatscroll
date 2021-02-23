@@ -50,6 +50,7 @@ export class HomePage implements AfterViewInit, OnInit {
     public rederer: Renderer2,
     public formBuilder: FormBuilder
   ) {}
+
   getUid() {
     return this.afAuth.user.subscribe((data) => (this.usrId = data.uid));
   }
@@ -121,8 +122,12 @@ export class HomePage implements AfterViewInit, OnInit {
               .getUser(this.username)
               .snapshotChanges()
               .subscribe((data) => {
-                console.log(data.payload.val);
+                console.log(data);
               });
+            this.firebaseservice.putUserMatches(
+              this.gatti[i].userId,
+              localStorage.getItem('uid')
+            );
             console.log(user);
             this.gatti.splice(i, 1);
 

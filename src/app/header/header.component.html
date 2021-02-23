@@ -20,10 +20,11 @@
 
      
 
-      <button class="bottone" style="color: green;padding-top:1%;" 
+      <button class="bottone" 
+      style="padding-top:1%;" 
       
        routerLink="/home"
-routerLinkActive="active-link"
+routerLinkActive="active"
 [routerLinkActiveOptions]="{ exact: true }"
       
       >
@@ -32,20 +33,25 @@ routerLinkActive="active-link"
 
       </button>
 
-<button class="bottone"   style="color: rgb(202, 192, 192); "
+<button class="bottone" 
+ routerLinkActive="active"   
 routerLink="/breeds">
 
 <ion-icon name="paw-sharp" size="large"></ion-icon>
 </button>
 
 
-      <button class="bottone"  style="color: rgb(202, 192, 192);margin-right: 3em;     background-color: transparent;" 
-      routerLinkActive="tab-selected" routerLink="/upload-cat" class="ios" tab="make-appointment">
+      <button class="bottone"  style="margin-right: 3em;     background-color: transparent;" 
+      routerLinkActive="active" routerLink="/upload-cat"  tab="make-appointment">
       <ion-icon name="cloud-upload-sharp" size="large"></ion-icon>
       
       </button>
-      <button  class="bottone"  style="color: rgb(202, 192, 192);" id="likeButton" (click)="putLike(i)"
-      routerLinkActive="tab-selected" routerLink="/user"
+     
+     
+     
+     
+      <button  class="bottone"   id="likeButton" (click)="putLike(i)"
+    routerLinkActive="active" routerLink="/user"
       >
       <ion-icon  name="chatbubbles-sharp" size="large"></ion-icon>
       

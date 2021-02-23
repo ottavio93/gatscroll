@@ -16,7 +16,8 @@ ion-header ion-toolbar:first-of-type {
 .bottone {
   background-color: transparent;
   margin-right: 10%;
+  color: rgb(202, 192, 192);
 }
-.active-link {
-  color: black;
+.bottone.active {
+  color: green;
 }
