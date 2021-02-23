@@ -65,13 +65,14 @@ export class SigninComponent implements OnInit {
     // this.createuser(nikname, this.afAuth.currentUser);
 
     this.submitStudentData();
-    location.href = '/home';
-    this.ngOnInit();
+    this.router.navigate(['/home']);
+    //
+    //
   }
   async onSignin(email: string, password: string) {
     await this.firebaseservice.signin(email, password);
     if (this.firebaseservice.isLoggedIn) this.isSignedIn = true;
-    location.reload();
+    // location.reload();
   }
   handleLogout() {
     this.isSignedIn = false;
@@ -96,8 +97,23 @@ export class SigninComponent implements OnInit {
     console.log(this.userinoForm.value);
     // this.userinoForm.value.userId = id;
     this.firebaseservice.createUser(this.userinoForm.value); // Submit student data using CRUD API
+    console.log('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff');
 
+    // this.reloadComponent();
+    //
     // this.ResetForm(); // Reset form when clicked on reset button
+    // this.ngOnInit();
+  }
+
+  reloadPage() {
+    location.reload();
+  }
+  reloadComponent() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
+    this.router.navigate(['/home']).then(() => {
+      window.location.reload();
+    });
   }
 
   // async createuser(userino: User) {

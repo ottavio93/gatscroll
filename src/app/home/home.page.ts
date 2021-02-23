@@ -153,6 +153,10 @@ export class HomePage implements AfterViewInit, OnInit {
               .subscribe((data) => {
                 console.log(data);
               });
+            this.firebaseservice.putUserMatches(
+              this.gatti[i].userId,
+              localStorage.getItem('uid')
+            );
             console.log(user);
             this.gatti.splice(i, 1);
             this.rederer.setStyle(

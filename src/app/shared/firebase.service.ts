@@ -6,7 +6,7 @@ import {
   AngularFireObject,
 } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { User } from './userModel';
 
 @Injectable({
@@ -18,6 +18,7 @@ export class FirebaseService implements OnInit {
   gattoRef: AngularFireObject<any>;
   gattoRefUser: AngularFireObject<any>;
   isLoggedIn = false;
+  mySubscription: any;
   constructor(
     private firebase: AngularFireDatabase,
     public firebaseAuth: AngularFireAuth,
@@ -36,16 +37,18 @@ export class FirebaseService implements OnInit {
         this.router.navigate(['/home']);
       });
   }
-  async signup(email: string, password: string) {
-    await this.firebaseAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then((res) => {
-        this.isLoggedIn = true;
-        localStorage.setItem('user', JSON.stringify(res.user));
-        localStorage.setItem('uid', JSON.stringify(res.user.uid));
-        // this.router.navigate(['/home']);
-      });
+  reload() {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+      }
+    });
   }
+
   logout() {
     this.firebaseAuth.signOut();
     localStorage.removeItem('user');
@@ -63,17 +66,40 @@ export class FirebaseService implements OnInit {
   //   return this.firestore.collection('Employees').add(employeeObject);
   // }
 
+  async signup(email: string, password: string) {
+    await this.firebaseAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then((res) => {
+        this.isLoggedIn = true;
+        localStorage.setItem('user', JSON.stringify(res.user));
+        localStorage.setItem('uid', JSON.stringify(res.user.uid));
+        //
+      });
+  }
   createUser(user: User) {
     console.log(user.nikname);
     console.log(localStorage.getItem('uid'));
     localStorage.setItem('username', user.nikname);
     this.bookingListRef = this.firebase.list('/userini');
 
-    this.bookingListRef.push({
-      userId: JSON.parse(localStorage.getItem('uid')),
-      nickname: user.nikname,
-    });
+    this.bookingListRef
+      .push({
+        userId: JSON.parse(localStorage.getItem('uid')),
+        nickname: user.nikname,
+      })
+      .then(() => {
+        location.reload();
+        console.log(
+          'gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggs'
+        );
+        window.location.reload();
+      });
   }
+  // async vaiadHome() {
+  //   // await this.createUser;
+  //   // console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+  //   // location.href = '/home';
+  // }
 
   // getUser(user: User) {
   //   console.log(user.nikname);
